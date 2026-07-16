@@ -1,35 +1,35 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-    name: proxmenux-route
-    namespace: proxmenux
-spec:
-    parentRefs:
-        - name: gatewayapi
-          namespace: traefik
-          sectionName: https
-    hostnames:
-        - ENC[AES256_GCM,data:50M/v9V3R7aQ19Fn7/R7p4I=,iv:rvRsbdUynQhhxitjT5zfa/G2z+tU++FLrxrzhROB2fY=,tag:GzFwir9Rrv5ldOXnP1YO1w==,type:str]
-    rules:
-        - matches:
-            - path:
-                type: PathPrefix
-                value: /menux
-          backendRefs:
-            - name: external-proxmenux
-              port: 8006
-sops:
-    age:
-        - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiL1RnbjhOVkc5T1JEa1kw
-            N2s2b2tSN1BOdi9aN0FRVTg0QXhXSWw2cm5rCko1MzBVUDFGaG95ZVRadUgwQnNi
-            SGFCeG5TN0RkRlg0dVR0UVR0bmlPbmsKLS0tIG51bXFkNkFJb1V3eVB0TG5YNHVj
-            N04rY0FkODl3WXhQYW5EeTBWd0VGRGMKvGNZ+F1Pizl3bPz6UeeFjqEQ9VsAg1Ui
-            VFbFoeSxHOQXIZaw+bbpPMNu+vAq4fX5oxjl9zBbaXxSBqX6yaNMnA==
-            -----END AGE ENCRYPTED FILE-----
-          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
-    encrypted_regex: ^(hostnames)$
-    lastmodified: "2026-07-16T20:06:47Z"
-    mac: ENC[AES256_GCM,data:AEmyhNn7Y0uaQsXSWK/BMpUelX2ctUfEODaiDNXSLd/anW6Qa9oYxuwibmCwESh/YVDKJAa5NrCC8HsSmAQZFW/BuVxqENsvV6f3DBHQmzwj0mjm1QEnvkh2tId6/cAwsT2txl1w9WeNLJBbgrDHkW6BASHEqvRYejzAbhfPA+Q=,iv:7Eaumicjvk7W/rZBTWr7p2dZGAA6ZuoAt3nonFDyRFc=,tag:clX3GvUM56e/PxrpcO4MmQ==,type:str]
-    version: 3.13.2
+# apiVersion: gateway.networking.k8s.io/v1
+# kind: HTTPRoute
+# metadata:
+#     name: proxmenux-route
+#     namespace: proxmenux
+# spec:
+#     parentRefs:
+#         - name: gatewayapi
+#           namespace: traefik
+#           sectionName: https
+#     hostnames:
+#         - ENC[AES256_GCM,data:50M/v9V3R7aQ19Fn7/R7p4I=,iv:rvRsbdUynQhhxitjT5zfa/G2z+tU++FLrxrzhROB2fY=,tag:GzFwir9Rrv5ldOXnP1YO1w==,type:str]
+#     rules:
+#         - matches:
+#             - path:
+#                 type: PathPrefix
+#                 value: /menux
+#           backendRefs:
+#             - name: external-proxmenux
+#               port: 8006
+# sops:
+#     age:
+#         - enc: |
+#             -----BEGIN AGE ENCRYPTED FILE-----
+#             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiL1RnbjhOVkc5T1JEa1kw
+#             N2s2b2tSN1BOdi9aN0FRVTg0QXhXSWw2cm5rCko1MzBVUDFGaG95ZVRadUgwQnNi
+#             SGFCeG5TN0RkRlg0dVR0UVR0bmlPbmsKLS0tIG51bXFkNkFJb1V3eVB0TG5YNHVj
+#             N04rY0FkODl3WXhQYW5EeTBWd0VGRGMKvGNZ+F1Pizl3bPz6UeeFjqEQ9VsAg1Ui
+#             VFbFoeSxHOQXIZaw+bbpPMNu+vAq4fX5oxjl9zBbaXxSBqX6yaNMnA==
+#             -----END AGE ENCRYPTED FILE-----
+#           recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+#     encrypted_regex: ^(hostnames)$
+#     lastmodified: "2026-07-16T20:06:47Z"
+#     mac: ENC[AES256_GCM,data:AEmyhNn7Y0uaQsXSWK/BMpUelX2ctUfEODaiDNXSLd/anW6Qa9oYxuwibmCwESh/YVDKJAa5NrCC8HsSmAQZFW/BuVxqENsvV6f3DBHQmzwj0mjm1QEnvkh2tId6/cAwsT2txl1w9WeNLJBbgrDHkW6BASHEqvRYejzAbhfPA+Q=,iv:7Eaumicjvk7W/rZBTWr7p2dZGAA6ZuoAt3nonFDyRFc=,tag:clX3GvUM56e/PxrpcO4MmQ==,type:str]
+#     version: 3.13.2
