@@ -2,3 +2,4 @@ resources:
   - middleware.yaml
   - service.yaml
   - secret.yaml
+  - httproute
