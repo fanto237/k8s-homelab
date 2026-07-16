@@ -1,5 +1,4 @@
 resources:
-  - httproute.yaml
   - middleware.yaml
   - service.yaml
   - secret.yaml
