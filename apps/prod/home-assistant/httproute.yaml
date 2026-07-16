@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: ha-route
+    namespace: ha
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:2lT4N4G5FKpLoElo,iv:51N3atfxbeVA741RmOIgheorO57DOt0nNFOcIQWgR/0=,tag:4kfaxLg0EmTDJmarc23fxg==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-ha
+              port: 8123
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqdlhySG1sb3VUejR2eHNG
+            bGNIUmtVZnlMd0tmcVdlbHc5S3F5TEFuaHpVCks2TzFpbXVRZHlpb0Z4Tlk2S2VK
+            emZRaVE2MGkvbTMzTStNck1nVk42bkkKLS0tIGp0RzkwWHZDNGdQQ2JkZHdQUU1l
+            bDdIMmV3YlFuUXdEWjFjaW5WS2xXUlUKokJR8IA9odMham7ibGtWIlx4m9rdi/dp
+            GUa9HRk1U794nxZFn2+9VFDeakoHHy1WbSGStz4aLIpaFWfkYUNwpA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-07-16T20:31:18Z"
+    mac: ENC[AES256_GCM,data:54w6SaxCB9tZ4bKFq//uWQ6TYtSr5y2wGuz8IE8Xwp38rMk7LOLpbLW4Iu+MiBLJXoHUZiuxiuvXFqlRjlDlNejfyXY9OnehSmhK2WFIpKybjHdjVvAF9zjOUP+xFiQr3skU6o6L9nXIFj1piKx4QLq8jElBMEY3HnThv/vkNJA=,iv:jyfXHTsKJMoLTch/IvAFA38yS288DjvMBt1P2bHt2IE=,tag:lQVKB011mQ0Asv/FN5WVQQ==,type:str]
+    version: 3.13.2
