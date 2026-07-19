@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: adguard-route
+  name: adguard-main-route
   namespace: adguard
 spec:
   parentRefs:
@@ -10,27 +10,74 @@ spec:
       sectionName: https
   hostnames:
     - adguard.fanto.dev
-    - ad56.adguard.fanto.dev
-    - ad86.adguard.fanto.dev
-    - ad96.adguard.fanto.dev
   rules:
     - matches:
-        - hostname: adguard.fanto.dev
+        - path:
+            type: PathPrefix
+            value: /
       backendRefs:
         - name: external-adguard
           port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: adguard-56-route
+  namespace: adguard
+spec:
+  parentRefs:
+    - name: gatewayapi
+      namespace: traefik
+      sectionName: https
+  hostnames:
+    - ad56.adguard.fanto.dev
+  rules:
     - matches:
-        - hostname: ad56.adguard.fanto.dev
+        - path:
+            type: PathPrefix
+            value: /
       backendRefs:
         - name: external-adguard56
           port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: adguard-86-route
+  namespace: adguard
+spec:
+  parentRefs:
+    - name: gatewayapi
+      namespace: traefik
+      sectionName: https
+  hostnames:
+    - ad86.adguard.fanto.dev
+  rules:
     - matches:
-        - hostname: ad86.adguard.fanto.dev
+        - path:
+            type: PathPrefix
+            value: /
       backendRefs:
         - name: external-adguard86
           port: 8080
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: adguard-96-route
+  namespace: adguard
+spec:
+  parentRefs:
+    - name: gatewayapi
+      namespace: traefik
+      sectionName: https
+  hostnames:
+    - ad96.adguard.fanto.dev
+  rules:
     - matches:
-        - hostname: ad96.adguard.fanto.dev
+        - path:
+            type: PathPrefix
+            value: /
       backendRefs:
         - name: external-adguard96
           port: 8080
