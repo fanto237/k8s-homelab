@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-adguard56
+  namespace: adguard
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: external-adguard56-slice
+  namespace: adguard
+  labels:
+    kubernetes.io/service-name: external-adguard56
+addressType: IPv4
+ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+endpoints:
+  - addresses:
+      - "192.168.50.6"
+    conditions:
+      ready: true

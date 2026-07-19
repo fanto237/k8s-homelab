@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: adguard
+resources:
+  - ../base
+  - httproute.yaml
+  - service.yaml
+  - service56.yaml
+  - service86.yaml
+  - service96.yaml
