@@ -30,7 +30,7 @@ spec:
       namespace: traefik
       sectionName: https
   hostnames:
-    - ad56.adguard.fanto.dev
+    - ad56.fanto.dev
   rules:
     - matches:
         - path:
@@ -51,7 +51,7 @@ spec:
       namespace: traefik
       sectionName: https
   hostnames:
-    - ad86.adguard.fanto.dev
+    - ad86.fanto.dev
   rules:
     - matches:
         - path:
@@ -72,7 +72,7 @@ spec:
       namespace: traefik
       sectionName: https
   hostnames:
-    - ad96.adguard.fanto.dev
+    - ad96.fanto.dev
   rules:
     - matches:
         - path:
