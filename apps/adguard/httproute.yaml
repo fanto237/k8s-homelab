@@ -8,36 +8,29 @@ spec:
     - name: gatewayapi
       namespace: traefik
       sectionName: https
-
   hostnames:
     - adguard.fanto.dev
-
+    - ad56.adguard.fanto.dev
+    - ad86.adguard.fanto.dev
+    - ad96.adguard.fanto.dev
   rules:
     - matches:
-        - path:
-            type: PathPrefix
-            value: /
+        - hostname: adguard.fanto.dev
       backendRefs:
         - name: external-adguard
           port: 8080
     - matches:
-        - path:
-            type: PathPrefix
-            value: /ad56
+        - hostname: ad56.adguard.fanto.dev
       backendRefs:
         - name: external-adguard56
           port: 8080
     - matches:
-        - path:
-            type: PathPrefix
-            value: /ad86
+        - hostname: ad86.adguard.fanto.dev
       backendRefs:
         - name: external-adguard86
           port: 8080
     - matches:
-        - path:
-            type: PathPrefix
-            value: /ad96
+        - hostname: ad96.adguard.fanto.dev
       backendRefs:
         - name: external-adguard96
           port: 8080
