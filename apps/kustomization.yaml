@@ -3,3 +3,4 @@ resources:
   - proxmenux
   - openspeed
   - adguard
+  - uptime-kuma
