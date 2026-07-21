@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: uptime-kuma-route
+    namespace: uptime-kuma
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:r2wOLx3rnMmIISGBa8jJeA==,iv:TO0Vy6wEyobvA86eYjaX9FEc3HmZ6FbNNyRC+Bsm8yU=,tag:xc5oC5Ji+71BlHMf3Ww4UQ==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: uptime-kuma
+              port: 3001
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnR0RPb0xRZGc4T1hrdktk
+            cjdSSTBnNVlZbVMyRStsMUU1UVBleHdFMVJ3CmtoUXN0a2xNV09UR1B3L2tYU0tZ
+            RDZ5eVE1ekF5VlV1b1Q0bEQxZ2hnYncKLS0tIG8wT0xQaERTb2JTdHpiWUpJTyt5
+            U1NnYnlqVWJNcjJXdDg4bDZld2pORzQKwcUxFxWLHn+Y4J2N2zQmonN4/KJC/MNF
+            MzQ3BfxuXZs7DdZj0fV1CoJfF7gNi4DCIEwywwTCZz/fsa78nZw5kw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-07-21T09:43:40Z"
+    mac: ENC[AES256_GCM,data:Uyro9oAd/LRBhrkgz6qDbXG6vAYfspWaYV7X+JynYlNkVenVFQWCC/x8t7+weshMpzYyEvXROadJWOOkYO5Ie7+8/W59enpNk5HbAUzFugfWJKgZ4LM9abcE6RFwm2fNUJrtP8LmI//Xp0YTumpvvszTvb3g+13u/RZ8AMZ2pVI=,iv:HCZqu9VyUuSzz9JM/EitbNahUcIOC9zzrvmtAkEMApU=,tag:qG3q0KsMF2lj0YEmvF9HwA==,type:str]
+    version: 3.13.2
