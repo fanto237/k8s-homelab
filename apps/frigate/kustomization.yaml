@@ -1,3 +1,4 @@
+namespace: frigate
 resources:
   - middleware.yaml
   - service.yaml
