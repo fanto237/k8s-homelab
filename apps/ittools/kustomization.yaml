@@ -1,0 +1,6 @@
+namespace: ittools
+resources:
+  - ../base
+  - deployment.yaml
+  - httproute.yaml
+  - service.yaml
