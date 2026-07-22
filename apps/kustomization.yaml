@@ -4,3 +4,4 @@ resources:
   - openspeed
   - adguard
   - uptime-kuma
+  - vaultwarden
