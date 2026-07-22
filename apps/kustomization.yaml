@@ -5,3 +5,5 @@ resources:
   - adguard
   - uptime-kuma
   - vaultwarden
+  - frigate
+  - ittools
