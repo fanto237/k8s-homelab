@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: affine
+  namespace: affine
+spec:
+  selector:
+    app: affine
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+    - name: affine
+      protocol: TCP
+      port: 3010
+      targetPort: 3010

@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: affine
+  namespace: affine
+  labels:
+    app: affine
+spec:
+  selector:
+    matchLabels:
+      app: affine
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: affine
+    spec:
+      initContainers:
+        - name: affine-migration
+          image: ghcr.io/toeverything/affine:stable
+          imagePullPolicy: Always
+          command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
+          envFrom:
+            - configMapRef:
+                name: affine
+            - secretRef:
+                name: affine
+          volumeMounts:
+            - name: data
+              mountPath: /root/.affine/storage
+              subPath: upload
+            - name: data
+              mountPath: /root/.affine/config
+              subPath: config
+      containers:
+        - name: affine
+          image: ghcr.io/toeverything/affine:stable
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: REDIS_SERVER_DATABASE
+              value: "0"
+          envFrom:
+            - configMapRef:
+                name: affine
+            - secretRef:
+                name: affine
+          ports:
+            - containerPort: 3010
+              name: affine
+          volumeMounts:
+            - name: data
+              mountPath: /root/.affine/storage
+              subPath: upload
+            - name: data
+              mountPath: /root/.affine/config
+              subPath: config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: affine
+      restartPolicy: Always

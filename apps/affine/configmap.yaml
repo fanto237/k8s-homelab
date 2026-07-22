@@ -1,0 +1,30 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+    name: affine
+    namespace: affine
+data:
+    AFFINE_SERVER_EXTERNAL_URL: ENC[AES256_GCM,data:ImPsP1wyo+xmgFY5idKBUHYoUL80AiJ4,iv:6g7uD4jTTogBWv3fnIP3OCxqppsGoUR7VABOkxnJJJQ=,tag:WyzX0C6sVnX/SqgiMA+5Og==,type:str]
+    MAILER_SENDER: ENC[AES256_GCM,data:cTJQQ3ksguZYXIQ6/Lm0Yg==,iv:laOR0DUQlhO4Pn9tI7ISSGzhUs0yiDDHjRX6ahYyjj0=,tag:4/yOkiSsUFXHEXev2ycTwg==,type:str]
+    MAILER_USER: ENC[AES256_GCM,data:RWHc10UghICJpASJttRsZywtUPWOR3OlTvaSIw==,iv:TBK0TCzt4RdSHDWEKEy8wW0kSDG6fTWsNhwpYSLMYVQ=,tag:GnhOiC1AbGqfvPBaOGXdHw==,type:str]
+    MAILER_HOST: ENC[AES256_GCM,data:ECBaIJ8S5APFl1UtVf6LDapz1i8=,iv:gNC0qYKPOqK3xHSks1ZURoSip9Saj1ubYKgvYzIsaCM=,tag:bHCdtjyc23N4/uVGKWWRlg==,type:str]
+    MAILER_PORT: ENC[AES256_GCM,data:F5CJ,iv:YRgtmCLGZJAL958ZBy8xGX2nChRGnit5u4x4Wv2G54A=,tag:ZwqMqvUmf7q5dx22iEizmw==,type:str]
+    REDIS_SERVER_HOST: ENC[AES256_GCM,data:I76Pv9yLMPoj6aufg2zw5Il9M0wupi9krHsUlQXjddHkj03hK/E91ZQ=,iv:oy43tBzzy7Bt8gWTe0RHuJecPbXqr+QL3HncUuwBxmo=,tag:JNvVOPO5EaGVi6UrM8vd4A==,type:str]
+    REDIS_SERVER_PORT: ENC[AES256_GCM,data:7RfORQ==,iv:qPDGVWU66CYow7VtFZvVrWTryycMlw88XuDOTzFZRbw=,tag:5uNRzxpYmXtzRNy0PmZ90w==,type:str]
+    REDIS_SERVER_USER: ENC[AES256_GCM,data:hIjwbeFTBQ==,iv:erMN2NaeA3Lv40/Cl8ykfEMEx/Gl2BAmXtzOARgQ97M=,tag:LP9RbCA/wfVCb2Ouv+lrPQ==,type:str]
+    REDIS_SERVER_DATABASE: ENC[AES256_GCM,data:wQ==,iv:NPp4v3JOOQUQYpWhATMkidgpbh/MOO2wFPvGA74ZhiY=,tag:lmRC+SKBEeXTxkmry1j9ZA==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFb1Bka1JHeDQzaGtsQ3Az
+            cW5mY1VFMklRSGc1eEVSU21XNWVkYTUxUFV3CjRZSTNkZ2o0am51WGs2ZWUxODVs
+            dUxGc0pXZ0tmNFpYUFAxMzlEaUdnTzQKLS0tIEJSTWFlVlZBcDJ5cFNjd0x4TGRp
+            KzFQemhqQVhPQlV0RjJnK2ZvOXlOTkEKcXGFCVSAb8nlBOOOMmNT0B2Z43GclF2B
+            S999ZUP3Nrp9sJHRuoPTCmPQzqxDJK4w/NJkuP+LnGj10roBmMpPQg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-07-22T19:52:00Z"
+    mac: ENC[AES256_GCM,data:mSQ4es/KSDQNIIvHZYkBtjrcQn65g1DBMyUU+SIHJv9Kk4atYDcUlUhvAEuLaNVf96tpmGg8EurGBhYU53LuEvFQMuJ3yuOKDs8L5Q2b5zWi0nsIjbldUxFHvDL+iCECL+8a0KJ49EicH0194BsNWf/vWWAJO81fZJCcwJAnQf0=,iv:uRHgoFbPd/dYOgidDZ8ZQXcY8bCh+qiFosiSk2T+RiQ=,tag:3rp87aAuCP7e9sICHoiNIQ==,type:str]
+    version: 3.13.2
