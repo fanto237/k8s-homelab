@@ -23,6 +23,7 @@ spec:
       containers:
         - name: ittools
           image: corentinth/it-tools:latest
+          imagePullPolicy: Always
           resources:
             requests:
               cpu: 100m
