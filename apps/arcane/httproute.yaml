@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: arcane-route
+    namespace: arcane
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:m3NYlspdTegk376eRUWP2g==,iv:qgPK+x1HiXjFkk0nMNqIt1QAfascz5X71qWeLQafeKw=,tag:jLPDq/5rhT+i3iPyWXMfgw==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-arcane
+              port: 3002
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaRnFadzBQOWNWUEJwWFhH
+            N1VVMHBHSll3eld6K3BvSUFwZnRaT05ZdEUwCmI0YUZrZkJVZFkxWlIrMVJxODJT
+            QjAraytvVE84ZlZIRkw5ditPNEJnNzQKLS0tIHFhdVVNeUhhaEc4dVFyTTNtVTJk
+            aXJzM20xQ3Z6b0Q1ZnByNTRFN3VhR0kKFoyd6fJjeU2eFXx4yFKlKUKEzN6+4ypo
+            Rok4xlT4ZEay++2+Uch+Sk5+Im+7ZqXrep51owUJ9bCm0ktsUjYxYA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-07-22T19:02:11Z"
+    mac: ENC[AES256_GCM,data:min2gf9CM74vefAv3UskLWgqPaLdq/0Tley+7V8uf4LYD2gzZ6RsDIZw3Tmd+KDLHqOdlS1lpsMCz6gPliC+2QHzDDZBEj1d+en98+mqjqO2AfK9NhvT7uueAFE5paRylYOO6bT9WOXoz3767Ku6G8j1E8LCbrc35INYig1aLTU=,iv:pZPb/xYIOcI4ukLTVn6+yW3djJBcYCCDdCgoycutvRg=,tag:TwYsvymDcFidK/jHjtt1fQ==,type:str]
+    version: 3.13.2

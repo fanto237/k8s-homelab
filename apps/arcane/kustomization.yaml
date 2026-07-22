@@ -1,0 +1,6 @@
+namespace: arcane
+resources:
+  - ../base
+  - httproute.yaml
+  - service.yaml
+  - slice.yaml
