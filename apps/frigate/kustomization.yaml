@@ -1,6 +1,7 @@
 namespace: frigate
 resources:
-  - middleware.yaml
-  - service.yaml
+  - ../base
+  - httproute.yaml
   - secret.yaml
-  - httproute
+  - service.yaml
+  - slice.yaml
