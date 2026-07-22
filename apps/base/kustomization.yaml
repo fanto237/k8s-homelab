@@ -1,3 +1,5 @@
 resources:
+  - basic-auth.yaml
+  - default-headers.yaml
   - namespace.yaml
-  - middleware.yaml
+  - secret.yaml
