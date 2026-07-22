@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget
+  namespace: budget
+  labels:
+    app: budget
+spec:
+  selector:
+    matchLabels:
+      app: budget
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: budget
+    spec:
+      containers:
+        - name: budget
+          image: docker.io/actualbudget/actual-server:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          envFrom:
+            - configMapRef:
+                name: budget
+          ports:
+            - containerPort: 5006
+              name: budget
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: budget-pvc
+      restartPolicy: Always
