@@ -1,35 +1,41 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-    name: vaultwarden-route
-    namespace: vaultwarden
+  name: vaultwarden-route
+  namespace: vaultwarden
 spec:
-    parentRefs:
-        - name: gatewayapi
-          namespace: traefik
-          sectionName: https
-    hostnames:
-        - ENC[AES256_GCM,data:7PrdJY7r1GAlRawFcbyd,iv:LmXGSt4BdzDnoHDH5CpDCXde5bjiBxMVQR7TCjnSj5Y=,tag:fKUUiI+wgkNYo05l/+vnZg==,type:str]
-    rules:
-        - matches:
-            - path:
-                type: PathPrefix
-                value: /
-          backendRefs:
-            - name: vaultwarden
-              port: 80
+  parentRefs:
+    - name: gatewayapi
+      namespace: traefik
+      sectionName: https
+  hostnames:
+    - ENC[AES256_GCM,data:7PrdJY7r1GAlRawFcbyd,iv:LmXGSt4BdzDnoHDH5CpDCXde5bjiBxMVQR7TCjnSj5Y=,tag:fKUUiI+wgkNYo05l/+vnZg==,type:str]
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: ExtensionRef
+          extensionRef:
+            group: traefik.io
+            kind: Middleware
+            name: default-headers
+      backendRefs:
+        - name: vaultwarden
+          port: 80
 sops:
-    age:
-        - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyYmh2OVFzSVdEQzRVVzJZ
-            bHRJMUF0WkE1aFF6dHYva3J6M0hIRlc1ZXdzCkV2dkZkZFgxdkhxYnpFWGRIZFh2
-            cWRmOFNTc0szYkRtZkRKL1o3aEhPYlUKLS0tIGQxWHN6alBJRmJHQllqTiszWjFx
-            a3VBVVhaNm5wdHBXYitUd0FudUNQTE0Kzq/wUBsX5jecWLERUwow3OHJwiEDW+hx
-            4ftHFQISu6qP/MMG2cy19etxk7SUltqofcPwnpc4g5CLzN3UXtXOMw==
-            -----END AGE ENCRYPTED FILE-----
-          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
-    encrypted_regex: ^(hostnames)$
-    lastmodified: "2026-07-22T18:10:48Z"
-    mac: ENC[AES256_GCM,data:s+QV1vKZ5t5nYqCmUR2t7XxRsk9QhyE0db9jwUhUM5apMvtQH+hLHBsuaeo4fZTagOQpmwe6l/2foOD9hOWjDvRl9XbnedzgMRphMsxkBJvzayk678hyvnU8zJvL6Daibx3kKKBaj8LcuWL98Nqko2quyravBFOwnxsDVrhgaXk=,iv:3SgFcHXBHGR0V22TDCNPiYhw3njgc4PBOF8MTgXvPC0=,tag:vBAN3GhEbzMudJEjfmVuBQ==,type:str]
-    version: 3.13.2
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyYmh2OVFzSVdEQzRVVzJZ
+        bHRJMUF0WkE1aFF6dHYva3J6M0hIRlc1ZXdzCkV2dkZkZFgxdkhxYnpFWGRIZFh2
+        cWRmOFNTc0szYkRtZkRKL1o3aEhPYlUKLS0tIGQxWHN6alBJRmJHQllqTiszWjFx
+        a3VBVVhaNm5wdHBXYitUd0FudUNQTE0Kzq/wUBsX5jecWLERUwow3OHJwiEDW+hx
+        4ftHFQISu6qP/MMG2cy19etxk7SUltqofcPwnpc4g5CLzN3UXtXOMw==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+  encrypted_regex: ^(hostnames)$
+  lastmodified: "2026-07-22T18:10:48Z"
+  mac: ENC[AES256_GCM,data:s+QV1vKZ5t5nYqCmUR2t7XxRsk9QhyE0db9jwUhUM5apMvtQH+hLHBsuaeo4fZTagOQpmwe6l/2foOD9hOWjDvRl9XbnedzgMRphMsxkBJvzayk678hyvnU8zJvL6Daibx3kKKBaj8LcuWL98Nqko2quyravBFOwnxsDVrhgaXk=,iv:3SgFcHXBHGR0V22TDCNPiYhw3njgc4PBOF8MTgXvPC0=,tag:vBAN3GhEbzMudJEjfmVuBQ==,type:str]
+  version: 3.13.2
