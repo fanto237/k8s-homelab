@@ -1,42 +1,22 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: audiobookshelf-audiobooks-nfs
+  name: audiobookshelf-media-nfs
 spec:
   capacity:
     storage: 2Ti
-  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
+  volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: audiobookshelf-audiobooks-nfs
-  mountOptions:
-    - nfsvers=4.1
-    - hard
-    - timeo=600
-    - retrans=2
-  nfs:
-    server: 192.168.31.213
-    path: /media/Audios/Audiobooks
+  storageClassName: audiobookshelf-media-nfs
 
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: audiobookshelf-podcasts-nfs
-spec:
-  capacity:
-    storage: 2Ti
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: audiobookshelf-podcasts-nfs
   mountOptions:
     - nfsvers=4.1
     - hard
     - timeo=600
     - retrans=2
+
   nfs:
     server: 192.168.31.213
-    path: /media/Audios/Podcasts
+    path: /mnt/tank/vm-datas/cluster/audiobookshelf

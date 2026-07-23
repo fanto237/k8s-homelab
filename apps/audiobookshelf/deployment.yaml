@@ -23,27 +23,6 @@ spec:
     spec:
       terminationGracePeriodSeconds: 30
 
-      # initContainers:
-      #   - name: initialize-data-directories
-      #     image: busybox:1.36.1
-      #     imagePullPolicy: IfNotPresent
-
-      #     command:
-      #       - /bin/sh
-      #       - -c
-      #       - |
-      #         set -eu
-
-      #         mkdir -p /data/config
-      #         mkdir -p /data/metadata
-
-      #         echo "PVC directories:"
-      #         ls -la /data
-
-      #     volumeMounts:
-      #       - name: application-data
-      #         mountPath: /data
-
       containers:
         - name: audiobookshelf
           image: ghcr.io/advplyr/audiobookshelf:latest
@@ -68,17 +47,18 @@ spec:
               mountPath: /metadata
               subPath: metadata
 
-            - name: audiobooks
+            - name: media
               mountPath: /audiobooks
+              subPath: Audiobooks
 
-            - name: podcasts
+            - name: media
               mountPath: /podcasts
+              subPath: Podcasts
 
           resources:
             requests:
               cpu: 100m
               memory: 256Mi
-
             limits:
               memory: 2Gi
 
@@ -87,10 +67,6 @@ spec:
           persistentVolumeClaim:
             claimName: audiobookshelf-data
 
-        - name: audiobooks
+        - name: media
           persistentVolumeClaim:
-            claimName: audiobookshelf-audiobooks
-
-        - name: podcasts
-          persistentVolumeClaim:
-            claimName: audiobookshelf-podcasts
+            claimName: audiobookshelf-media
