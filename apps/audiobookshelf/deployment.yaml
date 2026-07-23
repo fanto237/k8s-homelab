@@ -19,8 +19,30 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: audiobookshelf
+
     spec:
       terminationGracePeriodSeconds: 30
+
+      # initContainers:
+      #   - name: initialize-data-directories
+      #     image: busybox:1.36.1
+      #     imagePullPolicy: IfNotPresent
+
+      #     command:
+      #       - /bin/sh
+      #       - -c
+      #       - |
+      #         set -eu
+
+      #         mkdir -p /data/config
+      #         mkdir -p /data/metadata
+
+      #         echo "PVC directories:"
+      #         ls -la /data
+
+      #     volumeMounts:
+      #       - name: application-data
+      #         mountPath: /data
 
       containers:
         - name: audiobookshelf
@@ -38,11 +60,13 @@ spec:
               protocol: TCP
 
           volumeMounts:
-            - name: config
+            - name: application-data
               mountPath: /config
+              subPath: config
 
-            - name: metadata
+            - name: application-data
               mountPath: /metadata
+              subPath: metadata
 
             - name: audiobooks
               mountPath: /audiobooks
@@ -54,17 +78,14 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+
             limits:
               memory: 2Gi
 
       volumes:
-        - name: config
+        - name: application-data
           persistentVolumeClaim:
-            claimName: audiobookshelf-config
-
-        - name: metadata
-          persistentVolumeClaim:
-            claimName: audiobookshelf-metadata
+            claimName: audiobookshelf-data
 
         - name: audiobooks
           persistentVolumeClaim:

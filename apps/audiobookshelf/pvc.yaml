@@ -10,7 +10,7 @@ spec:
   storageClassName: audiobookshelf-audiobooks-nfs
   resources:
     requests:
-      storage: 10Ti
+      storage: 2Ti
 
 ---
 apiVersion: v1
@@ -25,32 +25,21 @@ spec:
   storageClassName: audiobookshelf-podcasts-nfs
   resources:
     requests:
-      storage: 10Ti
+      storage: 2Ti
 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: audiobookshelf-config
+  name: audiobookshelf-data
   namespace: audiobookshelf
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 10Gi
 
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: audiobookshelf-metadata
-  namespace: audiobookshelf
-spec:
-  accessModes:
-    - ReadWriteOnce
+  volumeMode: Filesystem
   storageClassName: longhorn
+
   resources:
     requests:
-      storage: 25Gi
+      storage: 30Gi
