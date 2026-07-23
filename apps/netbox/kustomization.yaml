@@ -1,0 +1,9 @@
+namespace: netbox
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - pvc.yaml
+  - secret.yaml
+  - service.yaml
+  - ../base
