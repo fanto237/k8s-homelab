@@ -1,0 +1,8 @@
+namespace: audiobookshelf
+resources:
+  - deployment.yaml
+  - httproute.yaml
+  - pv.yaml
+  - pvc.yaml
+  - service.yaml
+  - ../base

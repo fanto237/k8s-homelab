@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: audiobookshelf-route
+    namespace: audiobookshelf
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:RFtH0E4ZyO0WjeCTw106,iv:jBcLMLioghlr5ifvOvZW+N7ecHjS+cHnNaZ6D63uVP8=,tag:8bkgq9tdmE5bfKbOOtNzUg==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: audiobookshelf
+              port: 80
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyQTJCQUIxKzBVSGR2N0hy
+            MVlRcUVudE1KZzZ0cm5WYjFIOGR2RVpYbmtNCnN1K2tVS2I4MU5sNFdKKzRHUFVP
+            VmI2QU5VL2RCNzR1SHBScCs5dDR0a3cKLS0tIG1aVFdQcVFoOVVqRUlhQW9HRnlj
+            QkkwWGNVRjFJemcxRmhIVHpWcWpkUXMK6jmwl59MJcqE8ZnCBzj52aG6RxYxIcex
+            KZ6GnYhT8FJE4A1AI4nrwhVSorPzhpDOaTAJMc/YEqLSzNnLEdh7ig==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-07-23T16:41:24Z"
+    mac: ENC[AES256_GCM,data:D8YzDtX4Pt4kj77bUg4N3Sgv8albq48KI+evlgVurNhSEje/cBaF8GkWUaTI8PYNHxMwzr0ActISLa+z/qQoCLuyLQDNj1rd3UiEfEQzkNqPuRzkCnJDIjHQZYNpDChyn+DKhucU3c17ddPPmJjQ6Fmp/bC6X6OaY9utVE3lke8=,iv:YfwdwgWSn5I5CsJ7xaKbUgHQYjG5GSH97dNxd+/Rfz8=,tag:edwMpZuzkiPNrd42xp6fRA==,type:str]
+    version: 3.13.3
