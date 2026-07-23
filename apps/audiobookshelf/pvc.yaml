@@ -17,21 +17,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: audiobookshelf-podcasts
-  namespace: audiobookshelf
-spec:
-  accessModes:
-    - ReadWriteMany
-  volumeMode: Filesystem
-  storageClassName: audiobookshelf-podcasts-nfs
-  resources:
-    requests:
-      storage: 2Ti
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: audiobookshelf-data
   namespace: audiobookshelf
 spec:
