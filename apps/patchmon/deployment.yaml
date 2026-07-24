@@ -13,6 +13,8 @@ spec:
       labels:
         app: backend
     spec:
+      securityContext:
+        fsGroup: 1000
       initContainers:
         - name: fix-permissions
           image: busybox
@@ -38,10 +40,10 @@ spec:
           volumeMounts:
             - name: patchmon-files
               mountPath: /app/agents
-              subPath: /data/agents
+              subPath: agents
             - name: patchmon-files
               mountPath: /app/assets
-              subPath: /data/assets
+              subPath: assets
 
       volumes:
         - name: patchmon-files
