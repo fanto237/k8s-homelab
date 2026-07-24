@@ -13,6 +13,18 @@ spec:
       labels:
         app: backend
     spec:
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /data/agents /data/assets
+              chmod -R 775 /data
+          volumeMounts:
+            - name: patchmon-files
+              mountPath: /data
       containers:
         - name: backend
           image: ghcr.io/patchmon/patchmon-backend:latest
@@ -26,10 +38,10 @@ spec:
           volumeMounts:
             - name: patchmon-files
               mountPath: /app/agents
-              subPath: agents
+              subPath: /data/agents
             - name: patchmon-files
               mountPath: /app/assets
-              subPath: backend-assets
+              subPath: /data/assets
 
       volumes:
         - name: patchmon-files
