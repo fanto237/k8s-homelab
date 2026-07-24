@@ -69,6 +69,9 @@ spec:
         - name: frontend
           image: ghcr.io/patchmon/patchmon-frontend:latest
           imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: patchmon-config-frontend
           ports:
             - containerPort: 3000
           volumeMounts:
