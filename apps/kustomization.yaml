@@ -12,3 +12,4 @@ resources:
   - affine
   - audiobookshelf
   - netbox
+  - patchmon

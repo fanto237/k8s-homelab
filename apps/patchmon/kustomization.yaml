@@ -1,0 +1,9 @@
+namespace: patchmon
+resources:
+  - ../base
+  - configmap.yaml
+  - deployment.yaml
+  - httproute.yaml
+  - pvc.yaml
+  - secret.yaml
+  - service.yaml

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: patchmon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/patchmon/patchmon-backend:latest
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: patchmon-config
+            - secretRef:
+                name: patchmon-secret
+
+          volumeMounts:
+            - name: patchmon-files
+              mountPath: /app/agents
+              subPath: agents
+            - name: patchmon-files
+              mountPath: /app/assets
+              subPath: backend-assets
+
+      volumes:
+        - name: patchmon-files
+          persistentVolumeClaim:
+            claimName: patchmon
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: patchmon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/patchmon/patchmon-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: patchmon-files
+              mountPath: /usr/share/nginx/html/assets
+              subPath: frontend-assets
+      volumes:
+        - name: patchmon-files
+          persistentVolumeClaim:
+            claimName: patchmon
+---
