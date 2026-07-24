@@ -8,7 +8,7 @@ spec:
     app: backend
   ports:
     - port: 3000
-      targetPort: 3000
+      targetPort: 3001
 
 ---
 apiVersion: v1
