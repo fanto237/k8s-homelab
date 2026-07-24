@@ -34,7 +34,7 @@ spec:
       volumes:
         - name: patchmon-files
           persistentVolumeClaim:
-            claimName: patchmon
+            claimName: patchmon-backend
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -60,9 +60,9 @@ spec:
           volumeMounts:
             - name: patchmon-files
               mountPath: /usr/share/nginx/html/assets
-              subPath: frontend-assets
+
       volumes:
         - name: patchmon-files
           persistentVolumeClaim:
-            claimName: patchmon
+            claimName: patchmon-frontend
 ---
