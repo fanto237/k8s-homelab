@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: adguard-sync-configs
+    namespace: dns-management
+data:
+    vlan31.yaml: ENC[AES256_GCM,data:QR10iFyOwJgdWo6DdDnzWJW0NmjQF6mygf9SDhaUj0uBajH/9JT3mq8x4f40QDxBttxu5fnQ8wi/9V7Pvfdxx9HGgP/nrgvDQw0TTAW5n4NKrO2zPL9wUZVQq6hGy/xLmdErqXk//m1cH5rLMPiBN2u6TcHCWjWGDLLF8OW/uCl/5OmWehx4zbHzwwxZfUBJPycdwo1qjcrid6QR+Vu+RhnWEfIN8P+U2kciuZUYbbq7hZCffhFA+RZteFGdzGeDSSlZWBEPG9TYSIbxtbgXDs9qbkUDitTMEKimrZyHh6xQG4kROXqgpjHq2AjQMHsMmQfJ8j4Hug/IVSk+h/MQRbdQYA+9Zn/SMKK/xRh6FvuJr7Ftyq4gQXDiRk9jU57aB1qRZJJ9C7sf76KmQI0Hl6iWpDz8Ebqdfhi4FlzDNPknbbHjzr/6r4gSX48+wkI=,iv:/fQKC3AtowMOJ2V50I/DJGpMP2Ee4jviKmd5MOZo53Y=,tag:0AvI6BLFHu+GOd0ytq8zKw==,type:str]
+    vlan50.yaml: ENC[AES256_GCM,data:VgHzJiWub/j8iRU9gX8WJcRuh9OtEI5mMxWojoasvqdUrTElysGI0H1JpkbRlp0+iTKb25C1hqxrxi6o6EulQT6RIoPfpukaxJ1iV5JWfGIctCcoUS3necCKCHL92g0R7Z2/f/4r5AvrT48tV/ql+c1favirqUOoTmyJVdeBO6ObChukzUI7mqUS1BRR+qjfaaLJOV6wFa+eqPEFVZx8i1BBzTloL8B8ys4TT5wYhS3HNvursZtOVdbXz3Wb1rJSp8YoXdo92oy+8pVgxoWuXDEKwQCj9ERI5A0Elxo1on1lE0agdi9YUi+hnL2nOR2rnPo/9QtUIM30U/954kskrcI4JDVPUOqKJ94LvIQGy+Og7mprcb8XE960yipIbEd/e2w8NC+8Ur5iPhw/WWk9h9z6WGLWcKmtv5lIc/lTCVTVM6VPPdOkddh6nRbQ,iv:NWVBeODw5AoWrYohgVq/quHHSD986xlOQOOYAGYiYpw=,tag:HvMnAg4tKGSznVGppLfh2g==,type:str]
+    vlan88.yaml: ENC[AES256_GCM,data:BX03HN0eIhZhfP5ov1C0GtngaBug6ppkA0xwQFMb8NUJLJb7UH0l9wqLIElyKENigtlmwY7HffT3N2nDen8D+h08xgvysej2Mv7GlE8xyr2uB4qWUQXhOh23O8/aohvXDb1iEL8hKzF7Kx5EHpW/MhC08hsRAlU1MgZdU4dmDoQUIjxBZC7elbyJIZxOodHCv28DRMxl9Yl4qE4tv0NWAgO8KanZ5H7+fGcC6MlEJJlAQ4QG6EzyD8DX914yoSrvI+Rgrq48ziId/oYkxd9DvNIBwhEEoyegDLeE2I1DVrnOaMy2FOSI7swoC0izz1FiK/yriW6JBAmBIBkOguFk0kVStdtVABJ2V4Xh1P0spehOVHPw2Mt/FMiCOjelZ1q+WGHvU5Dmc0cWlPczc0xJzeXGsnFzry95Fq5hWgkC4TNYZHc3cyogzXkQvQLj,iv:lZs7MwdbFB7oKoqbjaFtnDLe8tQOQdp7KAQerm8TLms=,tag:7V0nHYiOTd2s5p9tQ2k4/w==,type:str]
+    vlan99.yaml: ENC[AES256_GCM,data:FPEs1kEAnfeaTSIXVUdiLviFvmiVgBIuH3Kuy1i2HZRah19QF1eDJqfNyHDIdVLZ/iiuw/KKzONXfo4HHiHDD92pbfwPqH3evv5yUCnrm6LaNtjhtqwl2w+K7BRxV7JFyv/hxgUl4NT1+006CHnAezU1cPa5LJqpM/GvAob/rhrgHNW9u+zRAd1ONM8YNVfWO5O23i7JOlP4arzb1AqiY9QTK2ZERwfNYHpbfKpP6K/eRw2ECotevUlCGiKGSJSiYBMl8qbWX/vluhHMQPc8w/D0U6fb2Du9kChgaUuDm+t41I+QP8AlbV9uy2/UQHHIWzuNVd79f9v7XRYsUxned+gIhXZCB13orSug4uIkb+RxbtkIwN0nyAtYw0rjPmfffZVHEratoweG0qsDNqFbjFVWXHoGhvZsPjtFxlPilPcGy0IHWMmODjb5OyMx,iv:eAauiDHL9JFVOS/aIRlqynIcZMztmOVKqjzAevGpxR4=,tag:g4OKH3N42VB7cbljYnyz6Q==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQS2hibEppVnhFOXhFOEVH
+            TDdkMnFzZkV5MVB6TXYrU0tNcVlSU2RhWm1JCmI1Umo1TGRUMTVkSzUvdVBvRlpx
+            ZjhydjBVbGF0akowTzBabTRoUTQ1RGMKLS0tIHFQdjJ3OEE5Wkhud1l2M3lMN0pH
+            RHlCTWdBcm9lRHFDVkpzbE45eUVWK3cKRUdAQG2mu6D+ImNPIh0rjuCIZvKs0xJa
+            17HGctXk7+XKe9lZXMhcXy5j82R2qkXJtfZV48ys70MJvnH6qaYI3Q==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-07-31T08:48:31Z"
+    mac: ENC[AES256_GCM,data:HTnpzWxPztDxT3nDi8HMQ7R6rx2BWx9oNeZ8I1s7+g3FiEFm86bNfWgbVRQPvkAZdkTyD+/R2DvMTKNdKsAFudQvL0Np4DFUNm1mj46Jn41gt0PzVRuBPvWDggJLko20h0glpalXkuvpDL9sUQGv1TuOomdb5Ueki4nSuc22G8A=,iv:wGHXFBmW8l1MRstNiRssF9thxi6uI92BgI4vUhJaz2o=,tag:IMO53s70fORcM/uqfP3YxA==,type:str]
+    version: 3.13.3

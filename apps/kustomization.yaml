@@ -13,3 +13,4 @@ resources:
   - audiobookshelf
   - netbox
   - patchmon
+  - adguardhome-sync

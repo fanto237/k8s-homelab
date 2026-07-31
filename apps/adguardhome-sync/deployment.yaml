@@ -1,0 +1,161 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard-sync-vlan31
+  namespace: dns-management
+  labels:
+    app: adguard-sync
+    vlan: "31"
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: adguard-sync
+      vlan: "31"
+  template:
+    metadata:
+      labels:
+        app: adguard-sync
+        vlan: "31"
+    spec:
+      containers:
+        - name: sync
+          image: ghcr.io/bakito/adguardhome-sync
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config/adguardhome-sync.yaml
+              subPath: vlan31.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: adguard-sync-configs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard-sync-vlan50
+  namespace: dns-management
+  labels:
+    app: adguard-sync
+    vlan: "50"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard-sync
+      vlan: "50"
+  template:
+    metadata:
+      labels:
+        app: adguard-sync
+        vlan: "50"
+    spec:
+      containers:
+        - name: sync
+          image: ghcr.io/bakito/adguardhome-sync
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config/adguardhome-sync.yaml
+              subPath: vlan50.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: adguard-sync-configs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard-sync-vlan88
+  namespace: dns-management
+  labels:
+    app: adguard-sync
+    vlan: "88"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard-sync
+      vlan: "88"
+  template:
+    metadata:
+      labels:
+        app: adguard-sync
+        vlan: "88"
+    spec:
+      containers:
+        - name: sync
+          image: ghcr.io/bakito/adguardhome-sync
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config/adguardhome-sync.yaml
+              subPath: vlan88.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: adguard-sync-configs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard-sync-vlan99
+  namespace: dns-management
+  labels:
+    app: adguard-sync
+    vlan: "99"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adguard-sync
+      vlan: "99"
+  template:
+    metadata:
+      labels:
+        app: adguard-sync
+        vlan: "99"
+    spec:
+      containers:
+        - name: sync
+          image: ghcr.io/bakito/adguardhome-sync
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config/adguardhome-sync.yaml
+              subPath: vlan99.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: adguard-sync-configs
