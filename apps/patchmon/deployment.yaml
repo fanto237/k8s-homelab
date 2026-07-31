@@ -5,6 +5,8 @@ metadata:
   namespace: patchmon
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: backend
@@ -15,14 +17,16 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
       initContainers:
         - name: fix-permissions
-          image: busybox
+          image: busybox:latest
           command:
             - sh
             - -c
             - |
               mkdir -p /data/agents /data/assets
+              chown -R 1000:1000 /data
               chmod -R 775 /data
           volumeMounts:
             - name: patchmon-files
@@ -36,7 +40,13 @@ spec:
                 name: patchmon-config
             - secretRef:
                 name: patchmon-secret
-
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
           volumeMounts:
             - name: patchmon-files
               mountPath: /app/agents
@@ -74,6 +84,13 @@ spec:
                 name: patchmon-config-frontend
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
           volumeMounts:
             - name: patchmon-files
               mountPath: /usr/share/nginx/html/assets
