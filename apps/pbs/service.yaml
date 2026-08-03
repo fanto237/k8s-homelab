@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-pbs
+  namespace: pbs
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8007
+      targetPort: 8007

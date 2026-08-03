@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: pbs-route
+    namespace: pbs
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:8hezJ4LACQHQZxqSxg==,iv:9mzSq0FEYfcJ+RYexPUNbo8QuTL8wJMvEw1veeqOAtA=,tag:QWu96VfCObOS+xkHsAErwA==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-pbs
+              port: 8007
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBRUWw4TU1NRllMWWJwVkpj
+            Ni9wM1BaVUcrNk9iejRieHdZRlU2RlpGMjFFCmg4OTFvMldrektjWjJQaDVBaTZX
+            NTNIQlo1T2doWTNueC9GaWp3M09XdFEKLS0tIEpCTytpSUFJb0JsVm1kTlRmVURa
+            bGR5amYzSlU4bHEyK1FDakV4citGVXcK1zXWhSvPeoLGkNpFT4JvphP7xVvAvK32
+            cfEHKpWfFkHXOKLtQouUIAA3eyBpU8CIJi8ac6XrAHZ85+VgrCUMzA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-03T16:39:13Z"
+    mac: ENC[AES256_GCM,data:p+Zx+uYjLup8dfr2IDEEDocxbgxPMX8MQx+83Cz6jNftDSNzPVN2ZqjErldc7HWyEZRTopQhQNka7G9bCyEmw7gn9yac2E9Mb7jmEnBtUpJ12aLbLP4uGYPuwUa2l4JXax2nL1ITwtXdsOQdRuHvlgZ+1LXFUDyBRZ9IcZlMoCo=,iv:x/LTG648pkFqFFHhRIzsFi2IWifkpIvChErWdfYlwUY=,tag:MeCPKZ/slrQiMqM+czhkzw==,type:str]
+    version: 3.13.3
