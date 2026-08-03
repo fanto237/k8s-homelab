@@ -16,3 +16,4 @@ resources:
   - adguardhome-sync
   - zot
   - pbs
+  - pgAdmin

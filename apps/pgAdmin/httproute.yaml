@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: pgadmin-route
+    namespace: pgadmin
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:jPGP1lGRzz6AJX4GRQUcgHQ=,iv:QemyqLnH1JMfOM8NljMuQAFPE+uMLHrkId1kyF0bzvc=,tag:G80MFwc9yMeZlpMi/ANlkQ==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          backendRefs:
+            - name: pgadmin
+              port: 80
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0MnMvL2dLajJyUTR2czlQ
+            bWdoSVB5cXduZlFQYlQvR05XMXpJaXg4UTFRCkpnaVhPeEtYclZENU9RYXpYMDd5
+            cTdyNzhqbU5jQ1ZoeTRtb0xESjlzMDAKLS0tIEdvZkNCWDRaRlRSZU5IOER3bmF6
+            U2JZdVJvVkpYYm5CVU1QeDdmd2FoUG8KegmLd8iyDUYsRpjgOLyKMndM3E7+k+n5
+            YuKnQQJoYGakotrpnoONDR8h3eK9aKaoZJ6VReMb+9jCt5qpVP/V5A==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-03T16:55:20Z"
+    mac: ENC[AES256_GCM,data:RWocPnuaHDU9erBfhA8O4soxs5SIlDalv0Kyb1oO+VC9y4bS6mt0SwzieeA7oKzyDRbS3IrFnugem2wwJ3ohdpBggqTTkZdthOe45T57Q/BDhiavLzUnRfA9FLuleK1SLQRcnORiKYte5JFhbCJ0W3Xu9XNONJxQ7kqmCI6Kg4I=,iv:H6boOjrii6Vhbr9r7v6+EG4Ewv3Z7/Xb+akNNszKij0=,tag:p6Psq4Czg1O5i1NmlEWP7g==,type:str]
+    version: 3.13.3
