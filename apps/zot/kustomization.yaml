@@ -8,7 +8,7 @@ resources:
   - secret.yaml
   - httproute.yaml
 
-secretGenerator:
+configMapGenerator:
   - name: zot-values
     files:
       - values.yaml

@@ -1,39 +1,73 @@
-replicaCount: ENC[AES256_GCM,data:dg==,iv:RScPJ0VCN8EziTIynI6NE0UDaBD4amyec5Cm/9QuXhc=,tag:iMT9COwM8yPk5OhByVB/Zw==,type:int]
+replicaCount: 1
+
 image:
-    repository: ENC[AES256_GCM,data:J0CMqQDXYWLD1BQAwjbi4xg1m3qkKHI=,iv:lrmJ23xAJkHfuw8qH8aI/xLC9afK/WBXQsnlOQTOhA8=,tag:5cN3bxk7LfbdzaFw57kJxw==,type:str]
-    tag: ENC[AES256_GCM,data:ZfTiQ/rm7A==,iv:HXX2QuoXKZEgx/ny6hMH3zw+4bajhdRp4KPBMx92Un0=,tag:1Yp400r3QBH7FR/9XEAN+A==,type:str]
-    pullPolicy: ENC[AES256_GCM,data:ADSjk6+qCxOBCYgq,iv:KoxFjxHxHra/O60Nb5wg1YcmJ8JiRrVsbrTZF508fvc=,tag:lmt/QuxZVcA2DRgUDLfuVg==,type:str]
+  repository: ghcr.io/project-zot/zot
+  tag: "v2.1.18"
+  pullPolicy: IfNotPresent
+
 service:
-    type: ENC[AES256_GCM,data:r91BwZ/1ufRm,iv:0uv84u9jU8gv/zftyEg4ba99hDdVwK1UdgyysXrnAuE=,tag:r4kRgtmpOko7h8EAyxzmuw==,type:str]
-    port: ENC[AES256_GCM,data:U0ouDA==,iv:zIsz4eNVGt3eV1MfNAXdj9lYr+vfeWojTTuiYH7mDCM=,tag:drUQQxaamENwN+zr2u6GzQ==,type:int]
-persistence: ENC[AES256_GCM,data:PRsv3g==,iv:dGau35OMNLuF5iWTvZJrw9vBIZJD4/1mdp2VmLeG15U=,tag:EKUTokWjXSspKuKT/73ObA==,type:bool]
+  type: ClusterIP
+  port: 5000
+
+persistence: true
+
 pvc:
-    create: ENC[AES256_GCM,data:H/0SQw==,iv:Lum7V7P8fe/l05bdmroYoyXkHdRuP9vJ7HrKWYn5afY=,tag:vt6wVLu/UM1rE3bXTJAO0g==,type:bool]
-    accessModes:
-        - ENC[AES256_GCM,data:vCBY0lPq5ALpxwdfZg==,iv:NuLWySne+uCkTvf0rBEVn6s2B+4ZgrYJMnPrNcDq5kE=,tag:RCK7lctMfeoHncK9kn2UDw==,type:str]
-    storage: ENC[AES256_GCM,data:304zoQ==,iv:oxkEdMZCZMIEHoL2DFXNu16x2h9QYMaatRIBmY/ggZU=,tag:BcLtoniUAeLd4SyJFbHE0Q==,type:str]
-mountConfig: ENC[AES256_GCM,data:0qOu0g==,iv:lW2NG3p7aCZfAIqs0Ksq6m9gGZkr1ZSObtjNVNTCzYQ=,tag:fvgl9vFDB+NyjFTv/0KK1g==,type:bool]
+  create: true
+  accessModes:
+    - ReadWriteOnce
+  storage: 20Gi
+
+mountConfig: true
+
 externalSecrets:
-    - secretName: ENC[AES256_GCM,data:0M+pICq5+sQ=,iv:UtQe4J/iiYTRUFOvXpF65g799fC9ZhhbwsRZy4O0Oyk=,tag:IYmvbKckNfYsRNrM9FXuAg==,type:str]
-      mountPath: ENC[AES256_GCM,data:MOCQDWcACg==,iv:3tgBeckd83zS8ayb0hh0h5GRbTbulyWRVvM9hY6SJ6A=,tag:M1dfyEJrg74xy9nIolQZbg==,type:str]
+  - secretName: zot-auth
+    mountPath: /secret
+
 configFiles:
-    config.json: ENC[AES256_GCM,data:h1dI9U+WFepPFBX09AyvPo+mX+5ByKBnoWGCMkD1DWVSNmtrNSVc9JfkqBZZ2aSD0pDJ79OciehdqOUdgw4yeCtVc/1ScF4UEfgWXPOMH4W3tjSMwgfoizVbxb3jV7XtD9vRhKuF5SsRcCGo2WzEvybiyF5jtNrm/Nyf/kfVFos7ooC4b8HPvuzlWUGD59jYvR8Uc1uMf4CoCGPyLx+D/CkilbxIgfzvXrWI3nZGbaJ+INSdMLugso9a91lEPFKMzPdmMmIa9t+4e6PiGiYNFMih4jNx+vtr84+Jssj6CF9VmCRXqAsYAKoGpAITZGbteEtP76W+/8wzdeFsRFaIweq0A6efUpgSL0q0IYeBasHCNDMD63iMLI2Uh5eVOEUGe90EsWGBRy+ETLO9TorDJ3IeJJSL1s9ymegySTEi50szMechU0NjGT/GAsZosAg0RHI4AsQGqEqRZoOXdA1Wp56S2ZbflqG9yARodEiK63mTsT6L2sS6D3GJYT/mUDqdfkfas3OjpmfLndgWX/6tm6H8qTU5dgjTZd6u98SPGFx3WNJQL4bA9LQ2Uc7xAdM0sSGeTB7LNPVzlnCtMASdCbA5KkNyCX9/osPc2k/4fM0aYK9XLkDzZiN5ea5EJsT07JgoPhkQOHfS2CeXsNkNa9BRo+18CMN+jkVT4c9Ax6HEaJWOh11GcmYppOLqPFezKa4Aa222gKQiPf1twK9SGX4c9TuTv3NRODn1/laJ/kqDMG9/cA+kpnME7fkC8lW5djubNSKAnIGKf9aO0pBZkdNj3PAxp7IZ6NvM8HYodX7FE3ZMyNCiU4HLK/RzEmfVNASLZpe7SP2aVNC5ua67d7nD82p7ym/wQROtY4NpscLIUt/0aXaqv9baBE+kZ3XW6voMDDMJf2gBo4HJxbnzy/eE03xQd6O6pSQatEmkebd8QF+iBw==,iv:YwndE4rXiPknY7avLnOJGNjzk5RKOFr4MNJQz7jCD5U=,tag:G8tOv7vtCVlu62c8bukb6A==,type:str]
+  config.json: |-
+    {
+      "storage": {
+        "rootDirectory": "/var/lib/registry"
+      },
+      "http": {
+        "address": "0.0.0.0",
+        "port": "5000",
+        "readTimeout": "600s",
+        "writeTimeout": "600s",
+        "auth": {
+          "failDelay": 2,
+          "htpasswd": {
+            "path": "/secret/htpasswd"
+          }
+        },
+        "accessControl": {
+          "repositories": {
+            "**": {
+              "policies": [
+                {
+                  "users": ["fanto"],
+                  "actions": ["read", "create", "update", "delete"]
+                }
+              ],
+              "defaultPolicy": []
+            }
+          }
+        }
+      },
+      "log": {
+        "level": "info"
+      },
+      "extensions": {
+        "search": {
+          "enable": true
+        },
+        "ui": {
+          "enable": true
+        }
+      }
+    }
 ingress:
-    enabled: ENC[AES256_GCM,data:vVDnVAc=,iv:oa2RmRx/UdqTokXFBoX22ABqsfQ5S72VjI03t4zMa/4=,tag:4lsny2CjL5g/QjJ/h59Wng==,type:bool]
+  enabled: false
+
 httproute:
-    enabled: ENC[AES256_GCM,data:L2W/VW8=,iv:B3vbID6WTHJk8tPHxtCLQ9Bx32arEnELbrbEcYlbVQM=,tag:cz89h3Rpqay/SxtSterQvQ==,type:bool]
-sops:
-    age:
-        - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByS3VNTjdFeGgvbkJjdDdj
-            TlJ5U3p0ZStCaDJDSlJhMy81RTVRdndUSURNCmJYRnFmS01OREhZSjFDUU9CZzZi
-            M21LWVUvaFZ4VmtHMWF5bTkwbUI2RG8KLS0tIDBNUmlpY2VJZzArZytZNmdlYVZi
-            KzJ0S1lvei9zWTFiYlNqalJma09kcFkKgni4h5asp5VdXUTdR+CCYkbmv8CGUb4O
-            4cV4qCxN+RVRrz3lu40geN6iG4fK1KgB9h6BZYtH39Y2E/1aFgjXoA==
-            -----END AGE ENCRYPTED FILE-----
-          recipient: age1rrecglktvwz8adkug540prvm2zfhkr9d939lvkpsw3gjzdznsueqz7968x
-    lastmodified: "2026-08-03T05:19:41Z"
-    mac: ENC[AES256_GCM,data:reENsD1IO/hKx9oloF9jMJN7+KGaB68u25ncU8OlARPdoWGP5bdl6srYrkmMjIne1akbQ/kHTETRZVKFa1cPA0mCrBNgdyhJWtsG6Pj5emy+6FTrMkJ37Lo5wq3wxK9yHGZznJ6t9tk6w7fPuQJ9AaZJYzjQf7/7Ivpn8W3G73E=,iv:NBUIJf9HOAb0Lz4N4wkMWSc5juEFpNsLP9bG+Pw6kpU=,tag:0DUwXGBfEf1OsoRAHa2Gmw==,type:str]
-    unencrypted_suffix: _unencrypted
-    version: 3.13.3
+  enabled: false
