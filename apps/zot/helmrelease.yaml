@@ -21,6 +21,6 @@ spec:
       enabled: false
 
   valuesFrom:
-    - kind: ConfigMap
+    - kind: Secret
       name: zot-values
       valuesKey: values.yaml
