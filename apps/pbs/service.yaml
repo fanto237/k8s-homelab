@@ -5,7 +5,7 @@ metadata:
   namespace: pbs
 spec:
   ports:
-    - name: http
+    - name: https
       protocol: TCP
       port: 8007
       targetPort: 8007

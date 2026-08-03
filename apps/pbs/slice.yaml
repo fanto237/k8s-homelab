@@ -8,7 +8,7 @@ metadata:
     kubernetes.io/service-name: external-pbs
 addressType: IPv4
 ports:
-  - name: http
+  - name: https
     protocol: TCP
     port: 8007
 endpoints:
