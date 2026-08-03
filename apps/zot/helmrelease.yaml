@@ -15,7 +15,6 @@ spec:
         name: zot
         namespace: registry
 
-  # HTTPRoute/zot-route is managed separately in this Kustomization.
   values:
     httproute:
       enabled: false
