@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: zot
-        namespace: flux-system
+        namespace: registry
 
   valuesFrom:
     - kind: ConfigMap
