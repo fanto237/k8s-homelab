@@ -40,6 +40,11 @@ spec:
                 name: pgadmin
             - secretRef:
                 name: pgadmin
+          env:
+            - name: PGADMIN_LISTEN_PORT
+              value: "8080"
+            - name: PGADMIN_DISABLE_POSTFIX
+              value: "True"
 
           startupProbe:
             httpGet:
@@ -71,7 +76,7 @@ spec:
               memory: 1Gi
 
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: pgadmin
           volumeMounts:
             - name: data
