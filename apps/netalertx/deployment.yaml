@@ -73,6 +73,12 @@ spec:
                   "SYNC_RUN":"schedule",
                   "SYNC_RUN_SCHD":"* * * * *",
                   "SYNC_BEHAVIOR":"copy-new",
+                  "SYNC_nodes":[
+                    "http://192.168.31.230:20212",
+                    "http://192.168.50.230:20212",
+                    "http://192.168.88.230:20212",
+                    "http://192.168.99.230:20212"
+                  ],
 
                   "ARPSCAN_RUN":"disabled",
                   "AVAHISCAN_RUN":"disabled",
