@@ -80,6 +80,8 @@ spec:
                   "NSLOOKUP_RUN":"disabled",
                   "DIGSCAN_RUN":"disabled",
                   "INTRNT_RUN":"disabled",
+                  "DISCOVER_PLUGINS":"True",
+
 
                   "WEBHOOK_RUN":"on_notification",
                   "WEBHOOK_URL":"$(DISCORD_WEBHOOK_URL)",
