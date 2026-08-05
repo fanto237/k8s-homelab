@@ -27,4 +27,4 @@ spec:
     - name: graphql
       port: 20212
       targetPort: graphql
-      nodePort: 30212
+      protocol: TCP
