@@ -12,3 +12,19 @@ spec:
       port: 20211
       targetPort: http
       protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: netalertx-hub
+  namespace: netalertx
+spec:
+  type: LoadBalancer
+  selector:
+    app: netalertx
+  ports:
+    - name: graphql
+      port: 20212
+      targetPort: graphql
+      nodePort: 30212
