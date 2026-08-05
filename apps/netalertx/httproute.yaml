@@ -1,0 +1,46 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: netalertx-route
+    namespace: netalertx
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:xKoxO0x182G3G4xqapy7+LnD,iv:P+2NLRJrUE+VvEhZTxBAz2fY+BpBWV4tiQsbshecuMU=,tag:T7qifnLu6SSng/Th+UjD7Q==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: basic-auth
+          backendRefs:
+            - name: netalertx
+              port: 20211
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBqZFZXT3pWTDVoSEk0ZTJI
+            eTBGYU0xS201bzFpb2xGNGVLNUpIRFljdldvCkt2enMvUmpLekhmZ0hXN05CaEUz
+            S2d1eDVkV1BhUkRxRG9YbDUwUURXZWsKLS0tIGZ4bi9LLzdMOEZQRllGbTdwaW9Y
+            MXFQSFZlWU5SVmMwMWVnWTluU3JBMW8Khr9N8TdrBdy5Bhc8yEbTw8Do+NwzceZX
+            W1ufxVpeQo3ZsOn5IRob8E3WI8+cRka8+OgNuclDxA69y47ysAadog==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-05T13:05:37Z"
+    mac: ENC[AES256_GCM,data:68OfwOLgqTWfYecd1A8FIp7CakX3qQnMeNeXOR5f22EV7pO/G4wLl52nofNV8kN1CN7EW5eX+n8MwOcxZzAfIwErSidSS8QfGmgi1+g//fhXRzHBUlo38ihaLH89wYmAdRA5Wu8+yv1v1ra9gLJD4v2cw3/g0a8knIHGjbNLHzQ=,iv:oBMdO48gx5mnIHzMKCaKWY928ADzdpjIwTSNszw6FoY=,tag:YUyxDmKaD6/qoV0JKORjtg==,type:str]
+    version: 3.13.3
