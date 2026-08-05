@@ -38,7 +38,7 @@ spec:
 
       containers:
         - name: netalertx
-          image: ghcr.io/netalertx/netalertx:v26.7.1
+          image: jokobsk/netalertx:26
 
           envFrom:
             - configMapRef:
