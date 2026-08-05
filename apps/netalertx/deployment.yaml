@@ -7,42 +7,79 @@ metadata:
     app: netalertx
 spec:
   replicas: 1
+
   strategy:
     type: Recreate
+
   selector:
     matchLabels:
       app: netalertx
+
   template:
     metadata:
       labels:
         app: netalertx
+
     spec:
       hostNetwork: false
+
       initContainers:
         - name: initialize-data-directory
           image: busybox:1.37
           command:
             - sh
             - -ec
-            - mkdir -p /data
+            - |
+              mkdir -p /data/config /data/db
+              chown -R 20211:20211 /data
           volumeMounts:
             - name: data
               mountPath: /data
+
       containers:
         - name: netalertx
           image: ghcr.io/netalertx/netalertx:latest
           imagePullPolicy: Always
+
           envFrom:
             - configMapRef:
                 name: netalertx
-            - secretRef:
-                name: netalertx
+
+          env:
+            - name: SYNC_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: netalertx
+                  key: SYNC_API_TOKEN
+            - name: SYNC_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: netalertx
+                  key: SYNC_ENCRYPTION_KEY
+            - name: APP_CONF_OVERRIDE
+              value: >-
+                {
+                  "TIMEZONE":"Europe/Berlin",
+                  "API_TOKEN":"$(SYNC_API_TOKEN)",
+                  "SYNC_encryption_key":"$(SYNC_ENCRYPTION_KEY)",
+                  "SYNC_RUN":"schedule",
+                  "SYNC_RUN_SCHD":"*/5 * * * *",
+                  "SYNC_nodes":"['http://192.168.31.230:20212','http://192.168.50.230:20212','http://192.168.88.230:20212','http://192.168.99.230:20212']",
+                  "SYNC_BEHAVIOR":"copy-new"
+                }
+
           ports:
             - name: http
               containerPort: 20211
               protocol: TCP
+
+            - name: graphql
+              containerPort: 20212
+              protocol: TCP
+
           securityContext:
             readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
                 - ALL
@@ -53,6 +90,9 @@ spec:
                 - CHOWN
                 - SETUID
                 - SETGID
+            seccompProfile:
+              type: RuntimeDefault
+
           resources:
             requests:
               cpu: 250m
@@ -60,32 +100,43 @@ spec:
             limits:
               cpu: "1"
               memory: 2Gi
+
           volumeMounts:
             - name: data
               mountPath: /data
+
             - name: tmp
               mountPath: /tmp
+
           startupProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: http
             periodSeconds: 10
+            timeoutSeconds: 3
             failureThreshold: 30
+
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: http
             periodSeconds: 15
             timeoutSeconds: 3
             failureThreshold: 3
+
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: http
             periodSeconds: 30
             timeoutSeconds: 3
             failureThreshold: 3
+
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: netalertx
+
         - name: tmp
           emptyDir:
             medium: Memory
