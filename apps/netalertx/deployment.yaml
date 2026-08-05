@@ -85,7 +85,9 @@ spec:
                   "WEBHOOK_URL":"$(DISCORD_WEBHOOK_URL)",
                   "WEBHOOK_PAYLOAD":"text",
                   "WEBHOOK_REQUEST_METHOD":"POST",
-                  "NTFPRCS_INCLUDED_SECTIONS":"['new_devices']"
+                  "NTFPRCS_INCLUDED_SECTIONS":"['new_devices']",
+                  "NTFPRCS_TEXT_TEMPLATE_new_devices":"🆕 {devName} | {eveIp} | {eveMac} | {devVendor}"
+
                 }
 
           ports:
