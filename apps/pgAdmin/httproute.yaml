@@ -9,7 +9,7 @@ spec:
           namespace: traefik
           sectionName: https
     hostnames:
-        - ENC[AES256_GCM,data:jPGP1lGRzz6AJX4GRQUcgHQ=,iv:QemyqLnH1JMfOM8NljMuQAFPE+uMLHrkId1kyF0bzvc=,tag:G80MFwc9yMeZlpMi/ANlkQ==,type:str]
+        - ENC[AES256_GCM,data:JNDtmegot0gWOr5dSDwit1A=,iv:cU3OrAd79fGzC3wSJHj6F5isYokQcoNCeGYDvBB4MYI=,tag:tIl3zRA85ts4VcBw8qQZcg==,type:str]
     rules:
         - matches:
             - path:
@@ -28,14 +28,14 @@ sops:
     age:
         - enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0MnMvL2dLajJyUTR2czlQ
-            bWdoSVB5cXduZlFQYlQvR05XMXpJaXg4UTFRCkpnaVhPeEtYclZENU9RYXpYMDd5
-            cTdyNzhqbU5jQ1ZoeTRtb0xESjlzMDAKLS0tIEdvZkNCWDRaRlRSZU5IOER3bmF6
-            U2JZdVJvVkpYYm5CVU1QeDdmd2FoUG8KegmLd8iyDUYsRpjgOLyKMndM3E7+k+n5
-            YuKnQQJoYGakotrpnoONDR8h3eK9aKaoZJ6VReMb+9jCt5qpVP/V5A==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZUFJVa1RLYjZkd0lKZnBW
+            ci9IWTRoV1AzUnFHc3JKejgwUVh4SjlwSzE0CjhUTmZyM3JPaU9hblI3czJUV01R
+            a3o4RUFIenhxYndiWlJ3T1greGVTMU0KLS0tIGV4bEwranVLbzRPR3ZSOEU2cUF3
+            emJZRnBtSHBINk8rd1o0RURtZkFwc0EKW2ELf4kyDV/GsZPo88LBdurDWi0LDfyV
+            u7yXSOusxupM/ALdGClWAMd+FdhcPwwFL3PgYWuqM1lt/zsX3bSrEg==
             -----END AGE ENCRYPTED FILE-----
           recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
     encrypted_regex: ^(hostnames)$
-    lastmodified: "2026-08-03T16:55:20Z"
-    mac: ENC[AES256_GCM,data:RWocPnuaHDU9erBfhA8O4soxs5SIlDalv0Kyb1oO+VC9y4bS6mt0SwzieeA7oKzyDRbS3IrFnugem2wwJ3ohdpBggqTTkZdthOe45T57Q/BDhiavLzUnRfA9FLuleK1SLQRcnORiKYte5JFhbCJ0W3Xu9XNONJxQ7kqmCI6Kg4I=,iv:H6boOjrii6Vhbr9r7v6+EG4Ewv3Z7/Xb+akNNszKij0=,tag:p6Psq4Czg1O5i1NmlEWP7g==,type:str]
+    lastmodified: "2026-08-05T13:18:37Z"
+    mac: ENC[AES256_GCM,data:oNcXjLGRREkKdTX7QN2hJUDO42I7gNOjwcGXacLN351WTeEg/dDk3qHeBaTNXKEFyva1jrXDRxruEaqg60Rmr/kzEjoiN6m5+DI4rJ/dVG3u48/rKXVoQ3z0lowbEq0SzIjvklBP68oImUzxyuMTwKSU4ancvD8RyAD3fMTmzbQ=,iv:SiUUC2j1yJwP/YxJUjGqu3yFWDzbFnLMApmvoc4glF8=,tag:NqT+Q9tTwjvuW0dJF6WNjw==,type:str]
     version: 3.13.3

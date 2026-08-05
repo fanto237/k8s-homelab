@@ -3,59 +3,40 @@ kind: Deployment
 metadata:
   name: pgadmin
   namespace: pgadmin
+  labels:
+    app: pgadmin
 spec:
-  replicas: 1
-
-  strategy:
-    type: Recreate
-
   selector:
     matchLabels:
-      app.kubernetes.io/name: pgadmin
-
+      app: pgadmin
+  replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: pgadmin
+        app: pgadmin
     spec:
+      dnsPolicy: ClusterFirst
       securityContext:
         fsGroup: 5050
-        fsGroupChangePolicy: OnRootMismatch
-
       containers:
         - name: pgadmin
-          image: dpage/pgadmin4:9.17
-          imagePullPolicy: IfNotPresent
-
-          securityContext:
-            runAsNonRoot: true
-            runAsUser: 5050
-            runAsGroup: 5050
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
+          image: dpage/pgadmin4
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
           envFrom:
             - configMapRef:
                 name: pgadmin
             - secretRef:
                 name: pgadmin
-          env:
-            - name: PGADMIN_LISTEN_PORT
-              value: "8080"
-            - name: PGADMIN_DISABLE_POSTFIX
-              value: "True"
-
-          resources:
-            requests:
-              cpu: 50m
-              memory: 256Mi
-            limits:
-              cpu: 500m
-              memory: 1Gi
-
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               name: pgadmin
           volumeMounts:
             - name: data
