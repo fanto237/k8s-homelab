@@ -18,3 +18,4 @@ resources:
   - pbs
   - pgAdmin
   - netalertx
+  - n8n
