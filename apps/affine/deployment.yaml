@@ -17,23 +17,23 @@ spec:
       labels:
         app: affine
     spec:
-      initContainers:
-        - name: affine-migration
-          image: ghcr.io/toeverything/affine:stable
-          imagePullPolicy: Always
-          command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
-          envFrom:
-            - configMapRef:
-                name: affine
-            - secretRef:
-                name: affine
-          volumeMounts:
-            - name: data
-              mountPath: /root/.affine/storage
-              subPath: upload
-            - name: data
-              mountPath: /root/.affine/config
-              subPath: config
+      # initContainers:
+      #   - name: affine-migration
+      #     image: ghcr.io/toeverything/affine:stable
+      #     imagePullPolicy: Always
+      #     command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
+      #     envFrom:
+      #       - configMapRef:
+      #           name: affine
+      #       - secretRef:
+      #           name: affine
+      #     volumeMounts:
+      #       - name: data
+      #         mountPath: /root/.affine/storage
+      #         subPath: upload
+      #       - name: data
+      #         mountPath: /root/.affine/config
+      #         subPath: config
       containers:
         - name: affine
           image: ghcr.io/toeverything/affine:stable
