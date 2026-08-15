@@ -13,6 +13,6 @@ ports:
     port: 5000
 endpoints:
   - addresses:
-      - "192.168.50.4"
+      - "192.168.50.215"
     conditions:
       ready: true
