@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-hermes
+spec:
+  ports:
+    - name: https
+      protocol: TCP
+      port: 9119
+      targetPort: 9119

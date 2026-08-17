@@ -1,0 +1,41 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: hermes-route
+    namespace: hermes
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:r+sSngek5tk0hI9yS3YGZQ==,iv:zk78UVLZnwQvMgoYKP1vXIcGkQz8LZiaUk79iHqssBA=,tag:5ra25whIYrTNypdf5SdHJw==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-hermes
+              port: 9119
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBnSzNDU2JhQWtrNjk4N0pK
+            eTFZSkg5NDlCWmRxYVNxQ2pBVk5LSGRKTnhnClVqaE9IZTZYa3FZME55R2dUNDRq
+            NkJqK0hDWVFHcVduUUpBd1YyR1JVK1kKLS0tICt6dnZzcU1ML1NmWHFaTlk1OG8x
+            VkFIQlo1c2IxQ2oyZUdJT0E0b1hHcjQKWJy7y17E2WOhCv65eAlv7+iHPhwKBRg5
+            CKfq+o/7QssgEPhT59kwONwFATZuSUoWXANt2dafZ/v24EOetaU6Dw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-17T17:45:23Z"
+    mac: ENC[AES256_GCM,data:O6QDOxh/EYzEvLQwjUS8b57/YzwLt6UtjQV2Q7aYF2LkPkEMZIyzs2qtJyZLptNCFTKwtiLD/9mGpNXqe6ELr6OnSkEy/YBc+yNGt1VFXH+QCyQ/waRUHh8u5BFi1jtlK6yht8myBGdUXh6MnLu4IZx3X5+dvaqsuPxGYN1DLH8=,iv:bZAFFQl2GzcqSWUl9CYpC4Tz8Bx+A36EYd+TsPN8x9A=,tag:KD45hjnMRqrMpedHXw/V1Q==,type:str]
+    version: 3.13.3

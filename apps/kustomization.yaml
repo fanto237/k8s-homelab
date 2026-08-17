@@ -19,3 +19,4 @@ resources:
   - pgAdmin
   - netalertx
   - n8n
+  - hermes
