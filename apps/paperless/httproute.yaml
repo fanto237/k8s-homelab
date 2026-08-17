@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: paperless-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:+T4SDtlizjZQfa0q+tafW0xmuw==,iv:rtfAdm76LPx7oDrVBGagCPRF7fdWfo8iOWZDjRqjtcg=,tag:WuQ/rQ26E+A+vabpIlhfbw==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-paperless
+              port: 3003
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEdnpzWVcyWlJtS3orV0Jv
+            SU5JZkpKNkJmWDhSWG9BM0ZZMXhTUDI3T3dNCko4Q2IrVEZuQUJqcXZVbURRVldP
+            WVp5Z2JyNjk1UWFoKzdna2xJa1ZiWWcKLS0tIFZXaTBDUy85V1JNbGl3THFVdHJY
+            QzBlNW9MSlVjcEZkVTFmTVlqT2NLdDQKvfFlNsLxHZ9/EPPmiwzKsT8diUBi+GiV
+            01UAbjSFTWrnoaaTli0H97zZDv3rz0n0/W9EJW4WqmZwZhiGpZDYRQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-17T18:50:23Z"
+    mac: ENC[AES256_GCM,data:IJZWEEWQDEmCmbvtkwjXw2d0Cs6f0TiTwDZAMQaJvTXrxMVRMUlB2xld8SjWLeHeYwqDZyD2dbnyiNi+amibYA1bs3ky/g2iCCuYNXy/no7vzMaYcR/4V+xfPleE/5FYeo6UYb2uykQdbkzNOJr14MuJhR5wwlbXAZ/DO1qehgs=,iv:KZq163sXnGoIJpICuQyj+tMpFeOncMeP3lM4tTCLpVI=,tag:Bzu+8V6W90W9oqAEsxB3oQ==,type:str]
+    version: 3.13.3

@@ -20,3 +20,5 @@ resources:
   - netalertx
   - n8n
   - hermes
+  - paperless
+  - opencloud
