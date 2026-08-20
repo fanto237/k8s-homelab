@@ -12,6 +12,6 @@ ports:
     port: 3003
 endpoints:
   - addresses:
-      - "192.168.31.214"
+      - "192.168.88.210"
     conditions:
       ready: true
