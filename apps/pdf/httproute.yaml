@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: pdf-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:AltacCf6nzbWkk7S+Q==,iv:9X6qk0Q/CY5uPV8wkVoRjUOTPHngIPkcIHj3HJvDWRA=,tag:HGTmkZhF66l/dVQ0LVlr9A==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-pdf
+              port: 3005
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBmTTZKUExkOEN0MU9YTTg3
+            R3ZmRUJ2azU4bHIxb3J0bjFtdkdGZzdTTWc4Ck1CVUdVeEErbW1VWUFsVjNjRHNZ
+            elpJOU5RS3ZhZnhOeEUyV0tnMzNuSUUKLS0tIEMrL24xdVdTUWg0N1RWLzdCemov
+            azhTRUxGcE5zdFZ2NFhBUVloR0I4d1EKXQp6oCyeAIA0+MTerPUfiWR7/HZFYQnk
+            NG4JefcqbKaV7prKIpuVBX3PGcQZ2tLj3HdtvkBurDAyoVngzZZhkQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-20T17:05:34Z"
+    mac: ENC[AES256_GCM,data:/rHNgLIFD6gJkFhbr/b3ToEaRwn9Ni6XJb3t8KAUNBFrQE9iGHhXqIyrAOVKgU2i1YpvD0k6Hkotd9Xh944NLtrcTw0HMZyDjydbvusu6wrK3/QKjtq4auWr+1gSpjTydm68KMtfkg1dsTqJgdfORkdOLN1JoyaxUsuZcfvkgFM=,iv:2HnWEMdQGd8I1hM05xiNQRZGG4aQ1vYDbhFSC2d2R7U=,tag:NRxctzkdQJUe/eAB2KGbEA==,type:str]
+    version: 3.13.3
