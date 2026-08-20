@@ -23,3 +23,5 @@ resources:
   - paperless
   - opencloud
   - pdf
+  - immich
+  - jellyfin

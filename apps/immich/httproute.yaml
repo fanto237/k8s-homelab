@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: immich-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:la9Tq5sWLiu/I3/YpJSNxw==,iv:NIYd0ZHymI9+X3mUr6THRxjir+PAQjInrjLOEgW4b6c=,tag:FsH11/k9yZkKARkXSPPTwA==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-immich
+              port: 2283
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6dk9uNU5IT0l6enNEcEY0
+            QlJnSnJLOGdyeXI5ZVFldVVHRHIyaHFmTHdzCkdOektjME9GclBHRm1lK1dodmxy
+            aXpHa3JjeVZSVFJRY0hCb0R1eXVvK3cKLS0tIHIrSzJzc2dJWlBkL2hlcDYzcnRH
+            aDluWTRiNEtmb2VmQmdwMlhLQS9oTkEK8XC/LSDR6rbRWBN5Zbij1hMIzuXl9hum
+            q2NFq03OIA1048Vwe/cPPTHnq/7uaS/CbMaYuNT8i0bIr9NzOFZp7Q==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-20T17:28:15Z"
+    mac: ENC[AES256_GCM,data:M7GfPml1HX4bGfCVEvlykLiDJLzPKpig1zFKGsaYbxxf2X3kBb+0rKRDgtKajrdnXqMbgqOHlreRJqzlpvUe9bVMxGn8tChLVvk0HRzqAvJ2E5u+gBtPfx3UYa5IIaklMX9qZ3nqrCN3UJYzbPIDajF/0vEIFP4YmSU20xnxLYY=,iv:0Y8/7AdyNAgLV0DLcQOT0o8Xn6hUl0dB5sh9YvSusAY=,tag:JgpZoeYnea+rm/s7mWvPcg==,type:str]
+    version: 3.13.3

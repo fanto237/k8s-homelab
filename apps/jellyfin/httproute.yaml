@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: jellyfin-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:WWtpcskupmfKhp2pumynsFwS,iv:6kcf3sUqFuO/90wUGFT1I7RWwsWOR06sKbIlJh7K2Kc=,tag:eciu5ZQBfO0KXRzhIM0EQA==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: external-jellyfin
+              port: 8096
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBb1JTb2M4emNYdFVsNk9j
+            Mk1NQnR0WTZXRzFWZ2sveUgwaU5RSXNXN2hjCmc0NHJGRVc3b0VKTHc1MzQ0QUVI
+            bVg1NDZYOXVWOWhiK25CWmdWUGN3S1kKLS0tIDBVM1ZQaDJkcFRmRnBxTVZMVjFp
+            UThocTFpQjJNbVZYZk5UajhGWjQ5bHMK6BAqJsRH9A1huljoAWZwCGpvZ+wNifxh
+            OqpJHEsFMloercuwLLa+EdDjo9u2V9bZNq1yYTweYykWgx0fd7Y+tQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-08-20T17:26:16Z"
+    mac: ENC[AES256_GCM,data:0+Lsr/rX79IEbjedAinmE3jxKdAqswHUGUJM4Ghqj5qTEGfT8YdpaCjDDxucnCqPkdMmh9WHS0H/q2absBu47mDOG+dE7+AW9elRiZfWEdCvwntjAxTRAMd5kinaO9tKKQOufLyS1L0OsbQXtbps3YKko12QveV24LPxBwO4NKQ=,iv:XDp5OmsFwF1+OT76k26Rl6aSoPfDHaG+0o8/Dw5kohQ=,tag:WsHVZj0/Ao7+NlmqDqxIiA==,type:str]
+    version: 3.13.3
