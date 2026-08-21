@@ -1,1 +1,2 @@
 *.dec.*
+apps/glance/config/glance.yaml
