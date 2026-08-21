@@ -13,7 +13,6 @@ resources:
   - audiobookshelf
   - netbox
   - patchmon
-  - adguardhome-sync
   - zot
   - pbs
   - pgAdmin
