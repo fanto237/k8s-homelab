@@ -4,7 +4,7 @@ metadata:
   name: external-unifi
 spec:
   ports:
-    - name: http
+    - name: https
       protocol: TCP
       port: 11443
       targetPort: 11443
