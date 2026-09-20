@@ -4,7 +4,7 @@ metadata:
   name: external-frigate
 spec:
   ports:
-    - name: https
+    - name: http
       protocol: TCP
       port: 8971
       targetPort: 8971
