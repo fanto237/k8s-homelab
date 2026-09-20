@@ -5,6 +5,7 @@ metadata:
   namespace: audiobookshelf
   labels:
     app.kubernetes.io/name: audiobookshelf
+
 spec:
   replicas: 1
 
@@ -25,6 +26,7 @@ spec:
 
       containers:
         - name: audiobookshelf
+
           image: ghcr.io/advplyr/audiobookshelf:2.36.1
           imagePullPolicy: Always
 
@@ -36,25 +38,37 @@ spec:
 
           args:
             - |
-              echo "Patching Audiobookshelf podcast fallback User-Agent..."
+              echo "Checking Audiobookshelf podcast User-Agent..."
+
+              OLD_UA='audiobookshelf (+https://audiobookshelf.org)'
+              NEW_UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36'
 
               files="$(grep -RIlF \
-                'audiobookshelf (+https://audiobookshelf.org)' \
-                /app/dist-server 2>/dev/null || true)"
+                --include='*.js' \
+                "$OLD_UA" \
+                /app 2>/dev/null || true)"
 
-              if [ -z "$files" ]; then
-                echo "ERROR: Audiobookshelf User-Agent string not found"
-                exit 1
+              if [ -n "$files" ]; then
+                echo "Found Audiobookshelf fallback User-Agent in:"
+                echo "$files"
+
+                for file in $files; do
+                  echo "Patching: $file"
+
+                  sed -i \
+                    's#audiobookshelf (+https://audiobookshelf\.org)#Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36#g' \
+                    "$file"
+                done
+
+                echo "User-Agent patch complete."
+              else
+                echo "WARNING: Audiobookshelf fallback User-Agent was not found."
+                echo "Starting Audiobookshelf without patch."
               fi
 
-              for file in $files; do
-                echo "Patching $file"
-                sed -i \
-                  's#audiobookshelf (+https://audiobookshelf\.org)#Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36#g' \
-                  "$file"
-              done
+              echo "Starting Audiobookshelf..."
 
-              exec node /app/dist-server/index.js
+              exec node /app/index.js
 
           env:
             - name: TZ
