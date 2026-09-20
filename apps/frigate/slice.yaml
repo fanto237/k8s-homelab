@@ -3,14 +3,13 @@ apiVersion: discovery.k8s.io/v1
 kind: EndpointSlice
 metadata:
   name: external-frigate-slice
-  namespace: frigate
   labels:
     kubernetes.io/service-name: external-frigate
 addressType: IPv4
 ports:
-  - name: http
+  - name: https
     protocol: TCP
-    port: 5000
+    port: 8971
 endpoints:
   - addresses:
       - "192.168.50.4"

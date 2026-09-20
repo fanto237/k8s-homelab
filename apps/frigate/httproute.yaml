@@ -2,7 +2,6 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
     name: frigate-route
-    namespace: frigate
 spec:
     parentRefs:
         - name: gatewayapi
@@ -12,28 +11,28 @@ spec:
         - ENC[AES256_GCM,data:XAVH+h6fCBCVBKY5g8bhZAM=,iv:Aq7/N+UXJYhaa5RSRW/mJHMLlzEQx4sglDrayRq96aE=,tag:7paMsUTxscGdGC9BmjlG4A==,type:str]
     rules:
         - matches:
-            - path:
-                type: PathPrefix
-                value: /
+              - path:
+                    type: PathPrefix
+                    value: /
           filters:
-            - type: ExtensionRef
-              extensionRef:
-                group: traefik.io
-                kind: Middleware
-                name: default-headers
+              - type: ExtensionRef
+                extensionRef:
+                    group: traefik.io
+                    kind: Middleware
+                    name: default-headers
           backendRefs:
-            - name: external-frigate
-              port: 5000
+              - name: external-frigate
+                port: 8971
 sops:
     age:
         - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBS1BWQzY0TmdLeHdUTFpH
-            MWg0QzVpenFDNFg2U2lDc3lZM3dMUVJhcUNnCnluU0FWMzlZc2xDanFGUzJuVDBG
-            UFpYZFIzS2dudU5majExdjlYZkJzTDQKLS0tIDNUWkFxeisxNkpDUE1la1UvMzlk
-            WS9TdDV4NjFrbmR3TGZUK0lqbHZQU0UKLxU4D0iwlsp4qLLEqOM4y5Ky9GWwh/73
-            dbsvSFc7SwDu/EYte9Db6UsKIfHe8BdNdPLFNdThxE3t2rgsLD0etQ==
-            -----END AGE ENCRYPTED FILE-----
+              -----BEGIN AGE ENCRYPTED FILE-----
+              YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBS1BWQzY0TmdLeHdUTFpH
+              MWg0QzVpenFDNFg2U2lDc3lZM3dMUVJhcUNnCnluU0FWMzlZc2xDanFGUzJuVDBG
+              UFpYZFIzS2dudU5majExdjlYZkJzTDQKLS0tIDNUWkFxeisxNkpDUE1la1UvMzlk
+              WS9TdDV4NjFrbmR3TGZUK0lqbHZQU0UKLxU4D0iwlsp4qLLEqOM4y5Ky9GWwh/73
+              dbsvSFc7SwDu/EYte9Db6UsKIfHe8BdNdPLFNdThxE3t2rgsLD0etQ==
+              -----END AGE ENCRYPTED FILE-----
           recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
     encrypted_regex: ^(hostnames)$
     lastmodified: "2026-07-16T20:01:33Z"
