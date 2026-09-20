@@ -25,8 +25,36 @@ spec:
 
       containers:
         - name: audiobookshelf
-          image: ghcr.io/advplyr/audiobookshelf:latest
+          image: ghcr.io/advplyr/audiobookshelf:2.36.1
           imagePullPolicy: Always
+
+          command:
+            - tini
+            - --
+            - /bin/sh
+            - -c
+
+          args:
+            - |
+              echo "Patching Audiobookshelf podcast fallback User-Agent..."
+
+              files="$(grep -RIlF \
+                'audiobookshelf (+https://audiobookshelf.org)' \
+                /app/dist-server 2>/dev/null || true)"
+
+              if [ -z "$files" ]; then
+                echo "ERROR: Audiobookshelf User-Agent string not found"
+                exit 1
+              fi
+
+              for file in $files; do
+                echo "Patching $file"
+                sed -i \
+                  's#audiobookshelf (+https://audiobookshelf\.org)#Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36#g' \
+                  "$file"
+              done
+
+              exec node /app/dist-server/index.js
 
           env:
             - name: TZ
