@@ -4,3 +4,4 @@ namespace: dns-management
 resources:
   - configmap.yaml
   - deployment.yaml
+  - ../base
