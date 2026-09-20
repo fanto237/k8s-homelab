@@ -26,7 +26,6 @@ spec:
 
       containers:
         - name: audiobookshelf
-
           image: ghcr.io/advplyr/audiobookshelf:2.36.1
           imagePullPolicy: Always
 
@@ -38,34 +37,48 @@ spec:
 
           args:
             - |
-              echo "Checking Audiobookshelf podcast User-Agent..."
+              set -e
 
-              OLD_UA='audiobookshelf (+https://audiobookshelf.org)'
-              NEW_UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36'
+              PATCH_FILE="/app/server/utils/ffmpegHelpers.js"
 
-              files="$(grep -RIlF \
-                --include='*.js' \
-                "$OLD_UA" \
-                /app 2>/dev/null || true)"
+              echo "Patching Audiobookshelf podcast download User-Agent..."
+              echo "Target: ${PATCH_FILE}"
 
-              if [ -n "$files" ]; then
-                echo "Found Audiobookshelf fallback User-Agent in:"
-                echo "$files"
-
-                for file in $files; do
-                  echo "Patching: $file"
-
-                  sed -i \
-                    's#audiobookshelf (+https://audiobookshelf\.org)#Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36#g' \
-                    "$file"
-                done
-
-                echo "User-Agent patch complete."
-              else
-                echo "WARNING: Audiobookshelf fallback User-Agent was not found."
-                echo "Starting Audiobookshelf without patch."
+              if [ ! -f "${PATCH_FILE}" ]; then
+                echo "ERROR: ${PATCH_FILE} does not exist"
+                exit 1
               fi
 
+              node - <<'NODE'
+              const fs = require('fs')
+
+              const file = '/app/server/utils/ffmpegHelpers.js'
+
+              const oldUserAgent =
+                "'audiobookshelf (+https://audiobookshelf.org)'"
+
+              const newUserAgent =
+                "'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/153.0 Safari/537.36'"
+
+              let source = fs.readFileSync(file, 'utf8')
+
+              if (!source.includes(oldUserAgent)) {
+                console.error('ERROR: Original Audiobookshelf fallback User-Agent not found')
+                process.exit(1)
+              }
+
+              source = source.replace(oldUserAgent, newUserAgent)
+
+              fs.writeFileSync(file, source)
+
+              console.log('Fallback User-Agent replaced successfully')
+              NODE
+
+              echo ""
+              echo "Resulting User-Agent configuration:"
+              grep -n "const userAgents" "${PATCH_FILE}"
+
+              echo ""
               echo "Starting Audiobookshelf..."
 
               exec node /app/index.js
