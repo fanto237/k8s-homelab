@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
     name: adguard-sync-configs
-    namespace: dns-management
 data:
     vlan31.yaml: ENC[AES256_GCM,data:QR10iFyOwJgdWo6DdDnzWJW0NmjQF6mygf9SDhaUj0uBajH/9JT3mq8x4f40QDxBttxu5fnQ8wi/9V7Pvfdxx9HGgP/nrgvDQw0TTAW5n4NKrO2zPL9wUZVQq6hGy/xLmdErqXk//m1cH5rLMPiBN2u6TcHCWjWGDLLF8OW/uCl/5OmWehx4zbHzwwxZfUBJPycdwo1qjcrid6QR+Vu+RhnWEfIN8P+U2kciuZUYbbq7hZCffhFA+RZteFGdzGeDSSlZWBEPG9TYSIbxtbgXDs9qbkUDitTMEKimrZyHh6xQG4kROXqgpjHq2AjQMHsMmQfJ8j4Hug/IVSk+h/MQRbdQYA+9Zn/SMKK/xRh6FvuJr7Ftyq4gQXDiRk9jU57aB1qRZJJ9C7sf76KmQI0Hl6iWpDz8Ebqdfhi4FlzDNPknbbHjzr/6r4gSX48+wkI=,iv:/fQKC3AtowMOJ2V50I/DJGpMP2Ee4jviKmd5MOZo53Y=,tag:0AvI6BLFHu+GOd0ytq8zKw==,type:str]
     vlan50.yaml: ENC[AES256_GCM,data:VgHzJiWub/j8iRU9gX8WJcRuh9OtEI5mMxWojoasvqdUrTElysGI0H1JpkbRlp0+iTKb25C1hqxrxi6o6EulQT6RIoPfpukaxJ1iV5JWfGIctCcoUS3necCKCHL92g0R7Z2/f/4r5AvrT48tV/ql+c1favirqUOoTmyJVdeBO6ObChukzUI7mqUS1BRR+qjfaaLJOV6wFa+eqPEFVZx8i1BBzTloL8B8ys4TT5wYhS3HNvursZtOVdbXz3Wb1rJSp8YoXdo92oy+8pVgxoWuXDEKwQCj9ERI5A0Elxo1on1lE0agdi9YUi+hnL2nOR2rnPo/9QtUIM30U/954kskrcI4JDVPUOqKJ94LvIQGy+Og7mprcb8XE960yipIbEd/e2w8NC+8Ur5iPhw/WWk9h9z6WGLWcKmtv5lIc/lTCVTVM6VPPdOkddh6nRbQ,iv:NWVBeODw5AoWrYohgVq/quHHSD986xlOQOOYAGYiYpw=,tag:HvMnAg4tKGSznVGppLfh2g==,type:str]
@@ -11,13 +10,13 @@ data:
 sops:
     age:
         - enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQS2hibEppVnhFOXhFOEVH
-            TDdkMnFzZkV5MVB6TXYrU0tNcVlSU2RhWm1JCmI1Umo1TGRUMTVkSzUvdVBvRlpx
-            ZjhydjBVbGF0akowTzBabTRoUTQ1RGMKLS0tIHFQdjJ3OEE5Wkhud1l2M3lMN0pH
-            RHlCTWdBcm9lRHFDVkpzbE45eUVWK3cKRUdAQG2mu6D+ImNPIh0rjuCIZvKs0xJa
-            17HGctXk7+XKe9lZXMhcXy5j82R2qkXJtfZV48ys70MJvnH6qaYI3Q==
-            -----END AGE ENCRYPTED FILE-----
+              -----BEGIN AGE ENCRYPTED FILE-----
+              YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQS2hibEppVnhFOXhFOEVH
+              TDdkMnFzZkV5MVB6TXYrU0tNcVlSU2RhWm1JCmI1Umo1TGRUMTVkSzUvdVBvRlpx
+              ZjhydjBVbGF0akowTzBabTRoUTQ1RGMKLS0tIHFQdjJ3OEE5Wkhud1l2M3lMN0pH
+              RHlCTWdBcm9lRHFDVkpzbE45eUVWK3cKRUdAQG2mu6D+ImNPIh0rjuCIZvKs0xJa
+              17HGctXk7+XKe9lZXMhcXy5j82R2qkXJtfZV48ys70MJvnH6qaYI3Q==
+              -----END AGE ENCRYPTED FILE-----
           recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
     encrypted_regex: ^(data|stringData)$
     lastmodified: "2026-07-31T08:48:31Z"

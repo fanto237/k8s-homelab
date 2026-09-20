@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adguard-sync-vlan31
-  namespace: dns-management
   labels:
     app: adguard-sync
     vlan: "31"
@@ -44,7 +43,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adguard-sync-vlan50
-  namespace: dns-management
   labels:
     app: adguard-sync
     vlan: "50"
@@ -84,7 +82,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adguard-sync-vlan88
-  namespace: dns-management
   labels:
     app: adguard-sync
     vlan: "88"
@@ -124,7 +121,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adguard-sync-vlan99
-  namespace: dns-management
   labels:
     app: adguard-sync
     vlan: "99"
