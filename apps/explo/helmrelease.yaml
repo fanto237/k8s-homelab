@@ -27,7 +27,7 @@ spec:
       retries: 3
   values:
     image:
-      tag: 1.2.0
+      tag: v1.2.0
     env:
       TZ: Europe/Berlin
     auth:
