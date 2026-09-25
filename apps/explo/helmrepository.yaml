@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: explo
+  namespace: explo
+spec:
+  interval: 12h
+  url: https://lumepart.github.io/Explo

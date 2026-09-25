@@ -1,0 +1,40 @@
+# Separate read/write SMB PV for Explo downloads. Replace placeholders before unsuspending Explo.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: explo-music
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
+    - nobrl
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: 192.168.31.213#Audios/Music#media#Explo
+    volumeAttributes:
+      source: //192.168.31.213/media/Audios/Music
+    nodeStageSecretRef:
+      name: smbsecret
+      namespace: explo
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: explo-music
+  namespace: explo
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  volumeName: explo-music
+  resources:
+    requests:
+      storage: 1Ti

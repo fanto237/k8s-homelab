@@ -1,0 +1,52 @@
+# This release is intentionally suspended. Replace placeholders and set spec.suspend: false only after Navidrome and ListenBrainz are configured.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: explo
+  namespace: explo
+spec:
+  suspend: true
+  interval: 30m
+  timeout: 15m
+  releaseName: explo
+  targetNamespace: explo
+  chart:
+    spec:
+      chart: explo
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: explo
+        namespace: explo
+      interval: 12h
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    image:
+      tag: 1.2.0
+    env:
+      TZ: Europe/Berlin
+    auth:
+      # Create this Secret from explo-ui-auth.secret.example.yaml and encrypt it with SOPS.
+      existingSecret: explo-ui-auth
+    persistence:
+      config:
+        size: 2Gi
+      media:
+        # This PVC maps to the same SMB library read by Navidrome.
+        existingClaim: explo-music
+        mountPath: /data
+        # Create this directory on the SMB share before starting Explo.
+        # Explo /data then corresponds to Navidrome /music/Explo.
+        subPath: Explo
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: "1"
+        memory: 1Gi

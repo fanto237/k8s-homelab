@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: explo
+resources:
+  - ../base
+  - explo-ui-auth.secret.yaml
+  - helmrelease.yaml
+  - helmrepository.yaml
+  - httproute.yaml
+  - music-pv-pvc.yaml
+  - secret.yaml
