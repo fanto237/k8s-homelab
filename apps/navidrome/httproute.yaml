@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: navidrome-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:uQLwSDZA49N9JCe7my3D,iv:4eHH9EyPy+PqWNZvNax0fKu577aL/6X2En0kalwJJow=,tag:ajhiIKYCMljRMQyxkfKRHQ==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: navidrome
+              port: 4533
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAyUk4yV1lNeG5JSVA1WEw5
+            SXo2cG4waStMbmNKQU9Dcm14SCtsc1lWamh3CjlDN2puTy9Jc1VJTlVFdUlNNGRC
+            OVh5TC9XaER4MjdySFNhcGhTRFp3RVEKLS0tIFlVTGRsejZNdXNDV2h0M0NJdVBC
+            bTllMjVHNisxMDJRM0F3TWlrYkVPU1EKQEoqbSLk2/Ktt5mRXaUNW5sSMXZaBmhO
+            vNltD7CoDt4mIn5Oa5TGShArROyXy26cHpIpF/wj3AEUPl9cws3awA==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-09-25T11:44:25Z"
+    mac: ENC[AES256_GCM,data:wSM5MA6huJNKmtOEPl5IY23XMjihVseXM/vkXPuj6M3AW5fFIuy1Vi/M+PAlaoolYx6dYYe78EatHrPoPD3GCPuw0Jtj2aqCW81Kah8WtMBuk2EbWK60NHgCinA5AHWIBwA/sL0NuDaXyn+EPqRBSBNT5Fnxqxp91XiGrpEYQ44=,iv:oQQY0rjIa+a32NOX1UR+KHhx7eu9fkaMNVfSd+ExWUY=,tag:Mkogl5j70sRpfi8rNZGfHQ==,type:str]
+    version: 3.13.3

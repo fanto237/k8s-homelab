@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+  labels:
+    app: navidrome
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: navidrome
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: navidrome
+          image: deluan/navidrome:0.63.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4533
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: navidrome-config
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+            failureThreshold: 24
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
+          volumeMounts:
+            - name: music
+              mountPath: /music
+              readOnly: true
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: music
+          persistentVolumeClaim:
+            claimName: navidrome-music
+        - name: data
+          persistentVolumeClaim:
+            claimName: navidrome-data

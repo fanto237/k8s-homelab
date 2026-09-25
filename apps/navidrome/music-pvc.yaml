@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: navidrome-music
+  namespace: navidrome
+spec:
+  accessModes:
+    - ReadOnlyMany
+  volumeName: navidrome-music
+  resources:
+    requests:
+      storage: 1Ti # Must not exceed the PV capacity.

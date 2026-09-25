@@ -1,0 +1,27 @@
+# Replace every REPLACE_WITH_* value before applying. Requires the SMB CSI driver.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: navidrome-music
+spec:
+  capacity:
+    storage: 1Ti # Informational for a static SMB PV; set to the share's usable capacity.
+  accessModes:
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - dir_mode=0555
+    - file_mode=0444
+    - uid=1000
+    - gid=1000
+    - nobrl
+  csi:
+    driver: smb.csi.k8s.io
+    readOnly: true
+    volumeHandle: 192.168.31.213#Audios/Music#media
+    volumeAttributes:
+      source: //192.168.31.213/media/Audios/Music
+    nodeStageSecretRef:
+      name: smbSecret
+      namespace: navidrome
