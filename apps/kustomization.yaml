@@ -1,6 +1,5 @@
 resources:
   - home-assistant
-  - proxmenux
   - openspeed
   - adguard
   - uptime-kuma
