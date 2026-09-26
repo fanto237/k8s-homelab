@@ -4,7 +4,7 @@ metadata:
   name: navidrome-music
 spec:
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteMany
   volumeName: navidrome-music
   storageClassName: ""
   resources:

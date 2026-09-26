@@ -7,7 +7,7 @@ spec:
   capacity:
     storage: 1Ti # Informational for a static SMB PV; set to the share's usable capacity.
   accessModes:
-    - ReadOnlyMany
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: ""
   mountOptions:
