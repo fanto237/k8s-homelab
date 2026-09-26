@@ -60,7 +60,6 @@ spec:
           volumeMounts:
             - name: music
               mountPath: /music
-              readOnly: true
             - name: data
               mountPath: /data
       volumes:
