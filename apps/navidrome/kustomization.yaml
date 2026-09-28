@@ -11,3 +11,4 @@ resources:
   - music-pvc.yaml
   - secret.yaml
   - service.yaml
+  - navidrome-secret.yaml

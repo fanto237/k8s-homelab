@@ -30,6 +30,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: navidrome-config
+            - secretRef:
+                name: navidrome
           resources:
             requests:
               cpu: 100m
