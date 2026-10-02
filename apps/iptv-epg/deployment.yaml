@@ -29,11 +29,11 @@ spec:
             - name: CRON_SCHEDULE
               value: "0 0 * * *"
             - name: MAX_CONNECTIONS
-              value: "4"
+              value: "2"
             - name: DAYS
               value: "1"
             - name: NODE_OPTIONS
-              value: "--max-old-space-size=3072"
+              value: "--max-old-space-size=6144"
             - name: RUN_AT_STARTUP
               value: "true"
           resources:
