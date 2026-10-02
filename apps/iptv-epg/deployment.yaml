@@ -32,6 +32,10 @@ spec:
               value: "2"
             - name: DAYS
               value: "1"
+            - name: TIMEOUT
+              value: "15000"
+            - name: DELAY
+              value: "1000"
             - name: NODE_OPTIONS
               value: "--max-old-space-size=7168"
             - name: RUN_AT_STARTUP

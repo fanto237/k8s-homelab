@@ -679,7 +679,7 @@
   <channel site="gatotv.com" site_id="universal_comedy" lang="es" xmltv_id="UniversalComedy.us@SD">Canal Universal Comedy</channel>
   <channel site="gatotv.com" site_id="univision_tlnovelas" lang="es" xmltv_id="UnivisionTlnovelas.us@SD">Canal Univision TLNovelas</channel>
   <!-- EPG provider: tv.mail.ru/tv.mail.ru.channels.xml. -->
-  <channel site="tv.mail.ru" site_id="1926" lang="ru" xmltv_id="AmediaHit.ru@SD">Amedia Hit</channel>
+  <!-- <channel site="tv.mail.ru" site_id="1926" lang="ru" xmltv_id="AmediaHit.ru@SD">Amedia Hit</channel>
   <channel site="tv.mail.ru" site_id="2717" lang="ru" xmltv_id="AmediaPremium.ru@SD">Amedia Premium</channel>
   <channel site="tv.mail.ru" site_id="2401" lang="ru" xmltv_id="Bolt.ru@SD">BOLT</channel>
   <channel site="tv.mail.ru" site_id="1066" lang="ru" xmltv_id="ExtremeSportsChannel.ru@SD">Extreme Sports</channel>
@@ -689,7 +689,7 @@
   <channel site="tv.mail.ru" site_id="905" lang="ru" xmltv_id="KHL.ru@SD">Телеканал КХЛ</channel>
   <channel site="tv.mail.ru" site_id="2680" lang="ru" xmltv_id="MatchIgra.ru@HD">Матч! Игра HD</channel>
   <channel site="tv.mail.ru" site_id="2753" lang="ru" xmltv_id="TraceUrban.fr@HD">Trace Urban HD</channel>
-  <channel site="tv.mail.ru" site_id="1818" lang="ru" xmltv_id="vijuPlusSport.ru@HD">viju+ Sport HD</channel>
+  <channel site="tv.mail.ru" site_id="1818" lang="ru" xmltv_id="vijuPlusSport.ru@HD">viju+ Sport HD</channel> -->
   <!-- EPG provider: tvprofil.com/tvprofil.com.channels.xml. -->
   <channel site="tvprofil.com" site_id="ba/tvprogram#rts-drama" lang="hr" xmltv_id="RTSDrama.rs@SD">RTS Drama</channel>
   <channel site="tvprofil.com" site_id="al/programacioni#rtsh-sport" lang="sq" xmltv_id="RTSHSport.al@SD">RTSH Sport</channel>
