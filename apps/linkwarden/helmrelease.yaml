@@ -42,12 +42,30 @@ spec:
           dataPath: data
           pvc:
             size: 20Gi
+            storageClass: longhorn
             reclaimPolicy: Retain
       database:
         existingSecret: linkwarden-secrets
       auth:
         disableRegistration: true
         enableCredentials: true
+        sso:
+          - provider: oidc
+            customName: REPLACE_WITH_OIDC_PROVIDER_NAME
+            wellKnownUrl: https://auth.netbird.fantocorp.de/application/o/linkwarden/.well-known/openid-configuration
+            scopes: "openid profile email"
+            existingSecret: linkwarden-secrets
+            clientId: ""
+            clientSecret: ""
+    extraEnvVars:
+      - name: NEXT_PUBLIC_OIDC_ENABLED
+        value: "true"
+      - name: OIDC_CUSTOM_NAME
+        value: Authentik
+      - name: OIDC_WELLKNOWN_URL
+        value: https://auth.netbird.fantocorp.de/application/o/linkwarden/.well-known/openid-configuration
+      - name: OIDC_SCOPES
+        value: "openid profile email"
     ingress:
       enabled: false
       tls:
