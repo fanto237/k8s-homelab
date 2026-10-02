@@ -65,10 +65,6 @@ spec:
               mountPath: /epg/public/channels.xml
               subPath: channels.xml
               readOnly: true
-            - name: channels
-              mountPath: /epg/public/cameroon-france-germany-sports-series.m3u
-              subPath: cameroon-france-germany-sports-series.m3u
-              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
