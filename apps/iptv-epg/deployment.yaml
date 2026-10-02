@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iptv-epg
+  labels:
+    app: iptv-epg
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: iptv-epg
+  template:
+    metadata:
+      labels:
+        app: iptv-epg
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: epg
+          image: ghcr.io/iptv-org/epg@sha256:2a2512cded6f73e71cbc18b81dcbd76f1a410d3291d4cdb0a3286f70c68950f2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: CRON_SCHEDULE
+              value: "0 0 * * *"
+            - name: MAX_CONNECTIONS
+              value: "4"
+            - name: RUN_AT_STARTUP
+              value: "true"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          startupProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 5
+            failureThreshold: 24
+          readinessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /epg/public
+            - name: channels
+              mountPath: /epg/public/channels.xml
+              subPath: channels.xml
+              readOnly: true
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: iptv-epg-data
+        - name: channels
+          configMap:
+            name: iptv-epg-channels

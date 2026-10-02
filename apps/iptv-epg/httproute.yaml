@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: iptv-epg-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:q8rjnxm7P4eZIKdwnLMagOfHRbcPeQ==,iv:dH+yJAbQK4DgcVFTeY9Ne4QIDtpNt5HHgFtJz4/+G74=,tag:avNVIt48oEEFgOY5DFBvnQ==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: iptv-epg
+              port: 3000
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBFcXVpbndYWVIyZDFsM1dZ
+            bUZBZk1MZ0dsVmRRcDBLUlA5Mm5ocE1vV25jCmExemgzNUFrOGNYUFZod09JYjZW
+            TTdJWGp3QklkYkFtYmJ6ZndETmppNncKLS0tIGRTTTZTeWhVTVhzMmpLa3hubkNC
+            cDFkcHZLVE1DUHlSK1RPakpnRzFmck0KlmmVWxfXphKnLM4+XXtB2bXT4cVadrs/
+            eRuEecyGu705HMVWjskzIrGWDsxdKDR5NwRz0TfCwEHOMTyaBOTuPQ==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-10-02T06:32:05Z"
+    mac: ENC[AES256_GCM,data:r4SpvSlC4HfOSzjD/nHYEAAcmGGAbcxmmZuEWjkZFKdb8ISZsHgjt0hK9hWiDEzFnAE7IFaejeEZoZb11WA9RJ7/fSF07A4KRi9zUEpGoSxGQuasDEI7bOqz0MefjQaJPmFuH7iIDWwZv85b08th6r9ifwj+ey/ErOXso4GRGbw=,iv:/aAT0iDjr5U/wap4kVzAQXgX9tlBb8ySn8lfr99seSw=,tag:P+znppQMcwshQXvzk6ikkg==,type:str]
+    version: 3.13.3
