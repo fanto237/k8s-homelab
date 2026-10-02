@@ -51,7 +51,7 @@ spec:
         enableCredentials: true
         sso:
           - provider: oidc
-            customName: Authentik
+            customName: Login with Authentik
             wellKnownUrl: https://auth.netbird.fantocorp.de/application/o/linkwarden/.well-known/openid-configuration
             scopes: "openid profile email"
             existingSecret: linkwarden-secrets
@@ -61,7 +61,7 @@ spec:
       - name: NEXT_PUBLIC_OIDC_ENABLED
         value: "true"
       - name: OIDC_CUSTOM_NAME
-        value: Authentik
+        value: Login with Authentik
       - name: OIDC_WELLKNOWN_URL
         value: https://auth.netbird.fantocorp.de/application/o/linkwarden/.well-known/openid-configuration
       - name: OIDC_SCOPES
