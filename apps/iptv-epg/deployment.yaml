@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: epg
-          image: ghcr.io/iptv-org/epg@sha256:2a2512cded6f73e71cbc18b81dcbd76f1a410d3291d4cdb0a3286f70c68950f2
+          image: ghcr.io/iptv-org/epg:master
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -33,15 +33,15 @@ spec:
             - name: DAYS
               value: "1"
             - name: NODE_OPTIONS
-              value: "--max-old-space-size=6144"
+              value: "--max-old-space-size=7.168"
             - name: RUN_AT_STARTUP
               value: "true"
           resources:
             requests:
-              cpu: 500m
+              cpu: 1
               memory: 2Gi
             limits:
-              cpu: "1"
+              cpu: "2"
               memory: 8Gi
           startupProbe:
             tcpSocket:
