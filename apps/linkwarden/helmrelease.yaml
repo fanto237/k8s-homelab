@@ -1,0 +1,82 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: linkwarden
+  namespace: linkwarden
+spec:
+  suspend: false
+  interval: 30m
+  timeout: 15m
+  releaseName: linkwarden
+  targetNamespace: linkwarden
+  chart:
+    spec:
+      chart: linkwarden
+      version: 0.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: adnoctem
+        namespace: linkwarden
+      interval: 12h
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    fullnameOverride: linkwarden
+    image:
+      tag: v2.16.3
+      pullPolicy: IfNotPresent
+    linkwarden:
+      replicas: 1
+      domain: link.fanto.dev
+      nextAuthSecret:
+        existingSecret:
+          name: linkwarden-secrets
+          key: nextauth-secret
+      data:
+        storageType: filesystem
+        filesystem:
+          dataPath: data
+          pvc:
+            size: 20Gi
+            reclaimPolicy: Retain
+      database:
+        existingSecret: linkwarden-secrets
+      auth:
+        disableRegistration: true
+        enableCredentials: true
+    ingress:
+      enabled: false
+      tls:
+        - hosts:
+            - link.fanto.dev
+    service:
+      type: ClusterIP
+      port: 3000
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Gi
+      limits:
+        cpu: "2"
+        memory: 2Gi
+    startupProbe:
+      enabled: true
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 60
+    readinessProbe:
+      enabled: true
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+    livenessProbe:
+      enabled: true
+      periodSeconds: 30
+      timeoutSeconds: 3
+      failureThreshold: 3
+    postgresql:
+      enabled: false

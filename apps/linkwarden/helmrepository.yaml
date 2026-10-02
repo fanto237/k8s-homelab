@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: adnoctem
+  namespace: linkwarden
+spec:
+  interval: 12h
+  url: https://adnoctem.github.io/charts

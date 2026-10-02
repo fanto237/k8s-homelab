@@ -1,0 +1,40 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+    name: linkwarden-route
+spec:
+    parentRefs:
+        - name: gatewayapi
+          namespace: traefik
+          sectionName: https
+    hostnames:
+        - ENC[AES256_GCM,data:9pZVK5e+KCJFvU7UoVg=,iv:229fqUxFNt0gyqY5c/UmK5tWeQs6ZVnx2qZC872wb+w=,tag:PUmmYOcR15ps21Giz5Uh8g==,type:str]
+    rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          filters:
+            - type: ExtensionRef
+              extensionRef:
+                group: traefik.io
+                kind: Middleware
+                name: default-headers
+          backendRefs:
+            - name: linkwarden
+              port: 3000
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA1SmJoRUFvVW12R3lOeldr
+            Z085TmtFSFQ1a1VDNWl4N3JjWTBZeDAzTWxzClRGN2JyOHlNcjQ3VnQ5c25XWFVj
+            dUk3OEczdlZKdmdRQXl1ZmZKV05HUlkKLS0tIDRtUU9tY1E3bHhlRVZpZm9Md0Rp
+            bklLK2EwYmsxam9FTTBNQmo5YXVUM00KRKn3igcYeREwE8rOMZ/QMqfMH0K34oWE
+            Js/gtawn3I4YHyJ16/WGYByYPRxKM3eNVjc/uw1XImQXn4CTjm7QOg==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age149cx2m4rwfw6argx9fam62vjtcjgeuepd78ej8f0mcpatdgxdqfslqu454
+    encrypted_regex: ^(hostnames)$
+    lastmodified: "2026-10-02T06:41:53Z"
+    mac: ENC[AES256_GCM,data:sbUEpiPgsHpFLyzFL5Ms1thEfOXj3xEY2Rz+KBll6FuTmoAAaLylDpWwZk14cY9RtcPZ/5ifTMTbjRKJrsfF2ApPwdD+QB8NgVbrOYnhIIfk8e8Fj2ATCQC0Eg/upP9Ep4fAvWNjsOSfRpk33bYnxxlXwRe+4dA5FjkayBK9Yso=,iv:yp1NcXUGsrgPxa1soYDBxI2L3jILgP2oKWxUSvHUMAA=,tag:wJOzQXG0zUmexWWL0j6jiw==,type:str]
+    version: 3.13.3
