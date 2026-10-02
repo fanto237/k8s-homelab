@@ -30,15 +30,17 @@ spec:
               value: "0 0 * * *"
             - name: MAX_CONNECTIONS
               value: "4"
+            - name: NODE_OPTIONS
+              value: "--max-old-space-size=1536"
             - name: RUN_AT_STARTUP
               value: "true"
           resources:
             requests:
-              cpu: 100m
-              memory: 256Mi
+              cpu: 250m
+              memory: 512Mi
             limits:
               cpu: "1"
-              memory: 1Gi
+              memory: 2Gi
           startupProbe:
             tcpSocket:
               port: http
